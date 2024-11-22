@@ -3,6 +3,7 @@ package Dao;
 import Model.City;
 
 import java.sql.Connection;
+import java.util.LinkedList;
 import java.util.List;
 import Model.City;
 import Utils.Ordenacoes;
@@ -14,14 +15,16 @@ import java.util.List;
 
 public  class DAO_Ordenacao implements DataAcessObject {
 
-    public City[] ordenacao(Enum Ordenacoes) throws SQLException {
+    public LinkedList<City> ordenacao(Enum Ordenacoes) throws SQLException {
 
         Connection connection = conexao.conectar();
         Statement statement = connection.createStatement();
         ResultSet resultado = statement.executeQuery("SELECT * FROM cidade ORDER BY "+Ordenacoes+" ASC;");
 
-        City[] cidades = new City[300];
-        int i = 0;
+        LinkedList<City> cidades = new LinkedList<City>();
+
+        //City[] cidades = new City[300];
+        //int i = 0;
         while (resultado.next()){
 
             String id = ""+resultado.getInt(1);
@@ -42,8 +45,9 @@ public  class DAO_Ordenacao implements DataAcessObject {
 
             City city = new City(id,cidade,microregiao,estado,regiaogeografica,areakm,populacao,domicilios,pibTotal,idh_geral,renda_media,renda_nominal,pea_dia,idh_educacao,idh_longevidade);
 
-            cidades[i] = city;
-            i++;
+            cidades.add(city);
+            //cidades[i] = city;
+            //i++;
 
         }
 
