@@ -25,14 +25,18 @@ import java.util.List;
  *
  * @author Sa_Th
  */
-public interface IDataAcessObject {
-    
-    Conexao conexao = new Conexao();
 
-    public List<City> consulta();
-    public List<City> ordenacao();
-    public void adicionar(City cidade) throws Exception;
-    public void atualizar(City cidade) throws Exception;
-    public void deletar(City cidade) throws Exception;
+/*
+NOTA PARA O GABRIEL
+    sim, eu tive que tirar as classes de interface
+    PQ? Pq a implementação da interface EXIGE que a classe que implemente implemente TODAS
+    as funções abstratas, então a DAO_Ordenacao teria que implementar o adicionar, atualizar, deletar e consultar, e não
+    apenas o ordenacao que era o objetivo, dito isso, só tirei ai a gente implementa em cada classe de uma vez, fica burro? SIM
+    mas a gente tá usando isso mais por obrigação de um requisito do professor do que por vonta de própria.
+ */
+
+interface DataAcessObject {
+    
+    public static final Conexao conexao = new Conexao();
 
 }
