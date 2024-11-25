@@ -18,12 +18,17 @@ public class DAO_Deletar implements DataAcessObject{
     public boolean deletarId(int id) throws SQLException{
 
         Connection connection = conexao.conectar();
+
         Statement statement = connection.createStatement();
-        ResultSet resultado = statement.executeQuery("DELETE FROM "+"cidades WHERE "+"cidade.id ="+id);
 
-        System.out.printf(resultado.toString());
 
-        return true;
+        String sql ="DELETE FROM "+"cidades WHERE "+"cidade.id ="+id;
+
+        int linhasAfetadas = statement.executeUpdate(sql);
+
+        if(linhasAfetadas > 0){
+            return true;
+        }else return false;
 
     }
 
