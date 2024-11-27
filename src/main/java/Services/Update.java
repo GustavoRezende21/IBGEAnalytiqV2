@@ -19,8 +19,10 @@
  */
 package Services;
 
+import Dao.DAO_Atualizar;
 import Model.City;
 import Utils.Writer;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -39,29 +41,11 @@ import java.util.Scanner;
 
 public class Update {
 
-    Read read;
-    Writer writer;
+    public boolean UpdateById(City cidade) throws SQLException {
 
-    public Update() {
-        this.read = new Read();
-        this.writer = new Writer();
-    }
-
-    public void UpdateById(String id, Lista lista, City cidade) {
-
-        for (int i = 0; i < lista.getCidades().size(); i++) {
-            
-            if(cidade.getId() == lista.getCidades().get(i).getId()){
-                System.out.println("Achei isso aqui: "+ lista.getCidades().get(i).toCSV());
-                LocalDate momento = LocalDate.now();
-                DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                formato.format(momento);
-                String horarioString = momento.toString();
-                cidade.setUltimaAtualizacao(horarioString);
-                lista.cidades.set(i, cidade);
-                writer.atualizarTodoCSV(lista.getCidades());
-            }
-        }
+        DAO_Atualizar dao = new DAO_Atualizar();
+        
+        return dao.update(cidade);
 
         //Pega a hora do sistema no momento do update
         

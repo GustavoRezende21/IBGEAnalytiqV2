@@ -21,6 +21,10 @@ package Swing;
 
 import Model.City;
 import Services.Lista;
+import Services.Read;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -34,24 +38,24 @@ public class Relatorio extends javax.swing.JFrame {
     /**
      * Creates new form Relatorio
      */
-    Lista lista;
+    Read read = new Read();
     City melhorPib;
     City piorPib;
     City melhorIdhEdu;
     City piorIdhEdu;
     City maiorPibTotal;
     City menorPibTotal;
-    public Relatorio(Lista lista) {
-        this.lista = lista;
+    public Relatorio(Lista lista) throws SQLException {
+        
         initComponents();
         
         //Inicializando as cidades
-        melhorPib = MelhorPib();
-        piorPib = PiorPib();
-        melhorIdhEdu = melhorIdhEdu(lista);
-        piorIdhEdu = piorIdhEdu();
-        maiorPibTotal = MaiorPibCidade(lista);
-        menorPibTotal = MenorPibCidade();
+        City melhorPib = MelhorPib();
+        City piorPib = PiorPib();
+        City melhorIdhEdu = melhorIdhEdu();
+        City piorIdhEdu = piorIdhEdu();
+        City maiorPibTotal = MaiorPibCidade();
+        City menorPibTotal = MenorPibCidade();
         
         
         //Mostrando no terminal só pra ver
@@ -103,83 +107,40 @@ public class Relatorio extends javax.swing.JFrame {
         PibMenorPibPcTotal.setText(String.valueOf(menorPibTotal.getPibPcTotal()));    
     }
 
-    private City MelhorPib(){
+    private City MelhorPib() throws SQLException {
         
-        City melhorPib = lista.getCidades().get(0);
+        return read.melhorPibPerCapta();
+
+    }
+    
+    private City PiorPib() throws SQLException{
         
-        for(int i = 1; i < lista.getCidades().size();i++){
-            
-            if(lista.getCidades().get(i).getPibPcTotal() > melhorPib.getPibPcTotal()){
-                melhorPib = lista.getCidades().get(i);
-            }
-            
-        }
-        return melhorPib;
+        return read.melhorPibPerCapta();
         
     }
     
-    private City PiorPib(){
-        City piorPib = lista.getCidades().get(0);
-        for(int i = 1; i < lista.getCidades().size();i++){
-            
-            if(piorPib.getPibPcTotal() > lista.getCidades().get(i).getPibPcTotal()){
-                piorPib = lista.getCidades().get(i);
-            }
-            
-        }
-        return piorPib;
+    private City melhorIdhEdu() throws SQLException{
+        
+        return read.melhorIDHEdu();
+        
     }
     
-    static City melhorIdhEdu(Lista lista){
-        City melhorIdhEdu = lista.getCidades().get(0);
-        for(int i = 1; i < lista.getCidades().size();i++){
-
-            if(lista.getCidades().get(i).getIdhEducacao() > melhorIdhEdu.getIdhEducacao()){
-                melhorIdhEdu = lista.getCidades().get(i);
-            }
-
-        }
-
-        return melhorIdhEdu;
+    private City piorIdhEdu() throws SQLException{
+        
+        return read.piorIDHEdu();
+        
     }
     
-    private City piorIdhEdu(){
-        City piorIdhEdu = lista.getCidades().get(0);
-        for(int i = 1; i < lista.getCidades().size();i++){
-            
-            if(piorIdhEdu.getIdhEducacao() > lista.getCidades().get(i).getIdhEducacao()){
-                piorIdhEdu = lista.getCidades().get(i);
-            }
-            
-        }
-        return piorIdhEdu;
+    private City MaiorPibCidade() throws SQLException{
+
+        return read.maiorPibTotal();
+      
     }
     
-    private City MaiorPibCidade(Lista lista){
-
-        City maiorPib = lista.getCidades().get(0);
-
-        for(int i = 1; i < lista.getCidades().size();i++){
-
-            if(lista.getCidades().get(i).getPibTotal() > maiorPib.getPibTotal()){
-                maiorPib = lista.getCidades().get(i);
-            }
-
-        }
-        return maiorPib;
-
-    }
-    
-    private City MenorPibCidade(){
-        City menorPib = lista.getCidades().get(0);
-        for(int i = 1; i < lista.getCidades().size();i++){
-            
-            if(menorPib.getPibTotal() > lista.getCidades().get(i).getPibTotal()){
-                menorPib = lista.getCidades().get(i);
-            }
-            
-        }
-        return menorPib;
+    private City MenorPibCidade() throws SQLException{
+        
+        return read.menorPibTotal();
+        
     }
     
     /**

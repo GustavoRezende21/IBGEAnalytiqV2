@@ -17,6 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 package Services;
 
 import Model.City;
@@ -39,7 +40,7 @@ import java.util.ArrayList;
  */
 
 public class Lista {
-
+/*
     private Reader leitor = new Reader();
     protected ArrayList<City> cidades;
     //private String filePathSaida = "C:\\Users\\joaov\\OneDrive\\Área de Trabalho\\Out\\out.csv"; //path do arquivo de saída
@@ -78,7 +79,7 @@ public class Lista {
             System.err.println("Erro ao processar arquivos: " + e.getMessage());
             e.printStackTrace();
         }
-        /*
+        
         if(fileOut.exists() /*&& fileOut.length() > 0*//*){
             System.out.println("O arquivo de saída já existe, irei ler");
             this.cidades = leitor.lerArquivoSaida(); //lê o que tem no arquivo de saída
@@ -91,7 +92,7 @@ public class Lista {
             //writer.writeOutFile();
             writer.atualizarTodoCSV(this.cidades); //já preenche o arquivo de saída
         }
-        */
+        
 
     }
 
@@ -140,7 +141,7 @@ public class Lista {
 
     }
     
-    /*
+    
     public void sizeList(){
         if(this.cidades == null){
             System.out.println("Está nulo");
@@ -148,7 +149,7 @@ public class Lista {
             System.out.println("Tamanho da lista: " + this.cidades.size());
         }
     }
-    */
+    
 
     
     public boolean removeCity(City cidade){
@@ -162,4 +163,6 @@ public class Lista {
         //sizeList();
         return true;
     }
+*/
+
 }

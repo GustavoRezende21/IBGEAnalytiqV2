@@ -22,7 +22,9 @@ package Swing;
 import Model.City;
 import Services.Create;
 import Services.Lista;
+import Services.Read;
 import Services.Update;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -40,14 +42,15 @@ public class Buscar extends javax.swing.JFrame {
     int indexDaCidadeBuscada;
     Lista lista;
     
-    public Buscar(int index, Lista lista) {
+    public Buscar(int id) throws SQLException {
         
         initComponents();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setDefaultCloseOperation(Buscar.DISPOSE_ON_CLOSE);
         
-        this.indexDaCidadeBuscada = index;
+        Read read = new Read();
+        //this.indexDaCidadeBuscada = index;
         
         //inicializa a lista aqui já
         //lista = new Lista();
@@ -58,15 +61,8 @@ public class Buscar extends javax.swing.JFrame {
         
         //ArrayList<City> cidades = lista.getCidades();
         
-        City cidadeBuscar = null;
+        City cidadeBuscar = read.consultarPorId(id);
         
-        for (int i = 0; i < lista.getCidades().size(); i++) {
-            City item = lista.getCidades().get(i);
-            if(item.getId().equals(String.valueOf(index))) {
-                cidadeBuscar = item;
-            }
-        }
-       
         System.out.println(cidadeBuscar.toString());
         
         //Preenchendo os textfield

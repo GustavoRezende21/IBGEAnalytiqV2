@@ -19,8 +19,10 @@
  */
 package Services;
 
+import Dao.DAO_Deletar;
 import Model.City;
 import Utils.Writer;
+import java.sql.SQLException;
 import java.util.ArrayList;
 /**
  *
@@ -34,20 +36,12 @@ import java.util.ArrayList;
 
 public class Delete {
 
-    Writer writer;
-
-    public Delete() {
-        writer = new Writer();
-    }
-
-    public void DeleteById(int id, Lista lista) {
-        //ArrayList<City> cidades = lista.getCidades();
-        //City cidade = cidades.get(id);
-        System.out.println(lista.getCidades().get(id).toString());
-        System.out.println(lista.getCidades().size());
-        lista.getCidades().remove(id);
-        //cidades.remove(cidade);
-        writer.atualizarTodoCSV(lista.getCidades());
+    public boolean DeleteById(int id) throws SQLException {
+        
+        DAO_Deletar dao = new DAO_Deletar();
+        
+        return dao.deletarId(id);
         
     }
+    
 }

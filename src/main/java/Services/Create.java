@@ -19,9 +19,9 @@
  */
 package Services;
 
+import Dao.DAO_Adicionar;
 import Model.City;
-import Utils.Writer;
-import java.util.ArrayList;
+import java.sql.SQLException;
 /**
  *
  * @author Gabriel Cândido Ribeiro da Silva <gcrs2018@gmail.com>
@@ -29,30 +29,17 @@ import java.util.ArrayList;
  * @author João Vitor Bier Barros <joaovitorbierbarros@gmail.com>
  * @author Theo da Silva Sa <03silva.theo@gmail.com>
  * @date 03/06/2024
- * @brief Class Main
+ * 
  */
 
 public class Create {
 
-    Writer writer;
+    public boolean createCity(City cidade) throws SQLException {
 
-    public Create() {
-        writer = new Writer();
-    }
-
-    public boolean createCity(Lista lista, City cidade) {
-
-        //Controlado pela interface Gráfica
-        ArrayList<City> cidades = lista.getCidades();
-        cidades.add(cidade);
-        lista.setCidades(cidades);
-        writer.atualizarTodoCSV(cidades);
-        return true;
-    }
-    /*
-    public boolean criarCidade(City cidade, int id, cidade, microregiao, estado, regiaogeografica, areakm, populacao, domicilios, pibTotal, idh_geral, renda_media, renda_nominal, pea_dia,idh_educacao, idh_longevidade)){
+        DAO_Adicionar dao = new DAO_Adicionar();
         
-    }
-    */
+        return dao.adicionar(cidade);
+        
+    }   
     
 }

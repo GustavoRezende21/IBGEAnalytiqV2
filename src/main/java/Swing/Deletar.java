@@ -22,8 +22,11 @@ package Swing;
 import Model.City;
 import Services.Delete;
 import Services.Lista;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -38,18 +41,18 @@ public class Deletar extends javax.swing.JFrame {
      * Creates new form Delete
      */
     private int id;
-    private Lista lista;
+    //private Lista lista;
     private City cidade;
     private TelaPrincipal telaPrincipal;
-    public Deletar(int id, TelaPrincipal telaPrincipal, Lista lista) {
+    public Deletar(int id, TelaPrincipal telaPrincipal) {
         initComponents();
-        this.cidade = lista.getCidades().get(id);
-        idCitySelect.setText(cidade.getMunicipio());
-        this.id = id;
+        //this.cidade = lista.getCidades().get(id);
+        //idCitySelect.setText(cidade.getMunicipio());
+        //this.id = id;
         this.telaPrincipal = telaPrincipal;
         setTitle("Deletar");
         //Delete delete = new Delete();
-        this.lista = lista;
+        //this.lista = lista;
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(Deletar.DISPOSE_ON_CLOSE);
     }
@@ -145,8 +148,12 @@ public class Deletar extends javax.swing.JFrame {
         Delete delete = new Delete();
         
         idCitySelect.setText(cidade.getMunicipio());
-        delete.DeleteById(id, lista);
-        this.telaPrincipal.removeRow(id);
+        try {
+            delete.DeleteById(id);
+        } catch (SQLException ex) {
+            Logger.getLogger(Deletar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        //this.telaPrincipal.removeRow(id);
         dispose();
         
     }//GEN-LAST:event_buttomYesDelCityActionPerformed

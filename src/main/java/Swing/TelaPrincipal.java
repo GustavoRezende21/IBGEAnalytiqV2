@@ -222,7 +222,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         //lista.sizeList();
         int linhaSelecionada = Table.getSelectedRow();
         if(linhaSelecionada != -1){
-            Editar telaEditar = new Editar(linhaSelecionada, this.lista,this);
+            Editar telaEditar = new Editar();
             telaEditar.setVisible(true);
         }
         System.out.println("Tamanho da lista após o processamento do botão editar");
@@ -236,7 +236,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         //lista.sizeList();
         int linhaSelecionada = Table.getSelectedRow();
         if(linhaSelecionada != -1){
-            Deletar telaDeletar = new Deletar(linhaSelecionada, this, this.lista);
+            Deletar telaDeletar = new Deletar(linhaSelecionada, this);
             telaDeletar.setVisible(true);
         }
         System.out.println("Tamanho da lista após o processamento do botão deletar");
@@ -264,7 +264,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void RelatorioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RelatorioButtonActionPerformed
         
-        Relatorio relatorio = new Relatorio(this.lista);
+        Relatorio relatorio = new Relatorio();
         relatorio.setVisible(true);
         
     }//GEN-LAST:event_RelatorioButtonActionPerformed

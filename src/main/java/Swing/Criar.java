@@ -26,6 +26,9 @@ import Services.Update;
 import Swing.Filters.LetterFilter;
 import Swing.Filters.NumberOnlyFilter;
 import Swing.Filters.NumberFilter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.text.AbstractDocument;
 
 /**
@@ -321,7 +324,11 @@ public class Criar extends javax.swing.JFrame {
                 idhLongevidade
         );
         
-        create.createCity(lista, cidadeNova);
+        try {
+            create.createCity(cidadeNova);
+        } catch (SQLException ex) {
+            Logger.getLogger(Criar.class.getName()).log(Level.SEVERE, null, ex);
+        }
         telaPrincipal.adicionarRow(cidadeNova);
         dispose();
         

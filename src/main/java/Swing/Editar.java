@@ -23,13 +23,17 @@ import Model.City;
 import Services.Create;
 import Services.Delete;
 import Services.Lista;
+import Services.Read;
 import Services.Update;
 import Swing.Filters.LetterFilter;
 import Swing.Filters.NumberFilter;
 import Swing.Filters.NumberOnlyFilter;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.text.AbstractDocument;
 
 /**
@@ -45,10 +49,9 @@ public class Editar extends javax.swing.JFrame {
      * Creates new form Edicao
      */
     int indexDaCidadeEditada;
-    Lista lista;
     TelaPrincipal telaPrincipal;
     City cidadeEditar;
-    public Editar(int idex, Lista lista, TelaPrincipal telaPrincipal) {
+    public Editar(int id) throws SQLException {
      
         this.telaPrincipal = telaPrincipal;
         initComponents();
@@ -56,16 +59,13 @@ public class Editar extends javax.swing.JFrame {
         this.setResizable(false);
         this.setDefaultCloseOperation(Editar.DISPOSE_ON_CLOSE);
         
-        this.indexDaCidadeEditada = idex;
-        
-        //declara a lista aqui já
-        this.lista = lista;
-        
+        //this.indexDaCidadeEditada = idex;
+        Read read = new Read();
         //atualiza a lista pra garantir que ela tá igual
         //lista.atualizarLista();
       
         //monta a cidade que vai ser editada
-        cidadeEditar = lista.getCidades().get(indexDaCidadeEditada);
+        this.cidadeEditar = read.consultarPorId(id);
         
         //Preenchendo os textfield
         idField.setText(cidadeEditar.getId());
@@ -75,7 +75,7 @@ public class Editar extends javax.swing.JFrame {
         regiaoGeograficaField.setText(cidadeEditar.getRegiaoGeografica());
         areaField.setText(String.valueOf(cidadeEditar.getArea()));
         populacaoField.setText(String.valueOf(cidadeEditar.getPopulacao()));
-        domiciliosField.setText(String.valueOf(cidadeEditar.getDomicilios()));
+        domiciliosField.setText(String.valueOf((int) cidadeEditar.getDomicilios()));
         pibTotalField.setText(String.valueOf(cidadeEditar.getPibTotal()));        
         idhField.setText(String.valueOf(cidadeEditar.getIdh()));        
         rendaMediaField.setText(String.valueOf(cidadeEditar.getRendaMedia()));        
@@ -333,13 +333,8 @@ public class Editar extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
-        Delete delete = new Delete();
-        Create create = new Create();
+        Update update = new Update();
         
-        delete.DeleteById(indexDaCidadeEditada, lista);
-        this.telaPrincipal.removeRow(indexDaCidadeEditada);
-        
-                
         String id = idField.getText();
         String municipio = municipioField.getText();
         String estado = estadoField.getText();
@@ -385,7 +380,11 @@ public class Editar extends javax.swing.JFrame {
         cidade.setUltimaAtualizacao(dataHoraFormatada);
         System.out.println(cidade.toCSVOut());
         
-        create.createCity(lista, cidade);
+        try {
+            update.UpdateById(cidade);
+        } catch (SQLException ex) {
+            Logger.getLogger(Editar.class.getName()).log(Level.SEVERE, null, ex);
+        }
         telaPrincipal.adicionarRow(cidade);
         dispose();
         
