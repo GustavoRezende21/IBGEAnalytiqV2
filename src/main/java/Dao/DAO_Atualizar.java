@@ -30,7 +30,7 @@ import java.util.LinkedList;
  *
  * @author notebook
  */
-public class DAO_Update implements DataAcessObject {
+public class DAO_Atualizar implements DataAcessObject {
     
     public boolean update(City cidade) throws SQLException {
         Connection connection = conexao.conectar();
