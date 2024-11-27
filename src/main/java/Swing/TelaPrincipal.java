@@ -79,6 +79,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         RelatorioButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        GraficoButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("IBGE AnalytiQ");
@@ -152,6 +153,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/IBGE_AnalytiQ_Logo2.png"))); // NOI18N
 
+        GraficoButton.setText("Gráfico");
+        GraficoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GraficoButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -166,9 +174,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
                         .addComponent(TextFieldBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(BuscarButton)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 161, Short.MAX_VALUE)
+                        .addComponent(GraficoButton))
                     .addComponent(jLabel1))
-                .addGap(245, 245, 245)
+                .addGap(12, 12, 12)
                 .addComponent(RelatorioButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(CreateButton)
@@ -193,7 +202,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                             .addComponent(CreateButton)
                             .addComponent(EditarButton)
                             .addComponent(DeletarButton)
-                            .addComponent(RelatorioButton))))
+                            .addComponent(RelatorioButton)
+                            .addComponent(GraficoButton))))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 477, Short.MAX_VALUE))
         );
@@ -258,6 +268,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
         relatorio.setVisible(true);
         
     }//GEN-LAST:event_RelatorioButtonActionPerformed
+
+    private void GraficoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GraficoButtonActionPerformed
+        // TODO add your handling code here:
+            LineChart example = new LineChart();
+            example.setVisible(true);
+    }//GEN-LAST:event_GraficoButtonActionPerformed
 
     public void removeRow(int row){
         //lista.sizeList();
@@ -351,6 +367,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton CreateButton;
     private javax.swing.JButton DeletarButton;
     private javax.swing.JButton EditarButton;
+    private javax.swing.JButton GraficoButton;
     private javax.swing.JButton RelatorioButton;
     private javax.swing.JTable Table;
     private javax.swing.JTextField TextFieldBuscar;
