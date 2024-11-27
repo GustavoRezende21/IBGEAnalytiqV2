@@ -28,13 +28,13 @@ import java.util.LinkedList;
  *
  * @author notebook
  */
-public class DAO_Consultar {
-    //Aproveitei o ENUM Ordenacoes por poder consultar pelos mesmo ID
-    public LinkedList<City> consultar(int idInformado) throws SQLException {
+public class DAO_Consultar implements DataAcessObject {
+
+    public City consultarPorId(int idInformado) throws SQLException {
 
         Connection connection = conexao.conectar();
         Statement statement = connection.createStatement();
-        ResultSet resultado = statement.executeQuery("SELECT * FROM cidade WHERE ="+idInformado);
+        ResultSet resultado = statement.executeQuery("SELECT * FROM cidade WHERE cidade.id="+idInformado+";");
 
         LinkedList<City> cidades = new LinkedList<City>();
 
@@ -71,7 +71,51 @@ public class DAO_Consultar {
         resultado.close();
         statement.close();
 
-        return cidades;
+        return cidades.get(0);
+    }
+    
+        public City consultarPorNome(String nomeCidade) throws SQLException {
+
+        Connection connection = conexao.conectar();
+        Statement statement = connection.createStatement();
+        ResultSet resultado = statement.executeQuery("SELECT * FROM cidade WHERE cidade.cidade='"+nomeCidade+"';");
+
+        LinkedList<City> cidades = new LinkedList<City>();
+
+        //City[] cidades = new City[300];
+        //int i = 0;
+        while (resultado.next()){
+
+            String id = ""+resultado.getInt(1);
+            String cidade = resultado.getString(2);
+            String microregiao = resultado.getString(3);
+            String estado = resultado.getString(4);
+            String regiaogeografica = resultado.getString(5);
+            double areakm = resultado.getDouble(6);
+            int populacao = resultado.getInt(7);
+            double domicilios = resultado.getDouble(8);
+            double pibTotal = resultado.getDouble(9);
+            double idh_geral = resultado.getDouble(10);
+            double renda_media = resultado.getDouble(11);
+            double renda_nominal = resultado.getDouble(12);
+            double pea_dia = resultado.getDouble(13);
+            double idh_educacao = resultado.getDouble(14);
+            double idh_longevidade = resultado.getDouble(15);
+
+            City city = new City(id,cidade,microregiao,estado,regiaogeografica,areakm,populacao,domicilios,pibTotal,idh_geral,renda_media,renda_nominal,pea_dia,idh_educacao,idh_longevidade);
+
+            cidades.add(city);
+            //cidades[i] = city;
+            //i++;
+
+        }
+
+        connection.close();
+
+        resultado.close();
+        statement.close();
+
+        return cidades.get(0);
     }
 
 }

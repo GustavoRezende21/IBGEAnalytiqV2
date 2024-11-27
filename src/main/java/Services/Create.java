@@ -50,7 +50,7 @@ public class Create {
         return true;
     }
     /*
-    public boolean criarCidade(City cidade){
+    public boolean criarCidade(City cidade, int id, cidade, microregiao, estado, regiaogeografica, areakm, populacao, domicilios, pibTotal, idh_geral, renda_media, renda_nominal, pea_dia,idh_educacao, idh_longevidade)){
         
     }
     */

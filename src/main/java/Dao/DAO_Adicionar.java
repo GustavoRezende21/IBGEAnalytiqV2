@@ -38,7 +38,7 @@ public class DAO_Adicionar implements DataAcessObject {
         Connection connection = conexao.conectar();
         //É usado para criar um objeto que representa a instrução SQL que será executada
         //Função invocada atraves da Connection
-        Statement statement = connection.createStatement();
+        //Statement statement = connection.createStatement();
         /*
         ResultSet resultado = statement.executeQuery("INSERT INTO cidade (id, cidade,"
                 + " microregiao, estado, regiaogeografica, areakm, populacao,"
@@ -48,9 +48,9 @@ public class DAO_Adicionar implements DataAcessObject {
          */
         String sql = "INSERT INTO cidade (id, cidade,"
                 + " microregiao, estado, regiaogeografica, areakm, populacao,"
-                + " domicilios, pibTotal, idh_geral, renda_media, renda_nominal, pea_dia,"
+                + " domicilios, pib_total, idh_geral, renda_media, renda_nominal, pea_dia,"
                 + " idh_educacao, idh_longevidade) VALUES (?, ?, ?, ?, ?, ?, ?,"
-                + " ?, ?, ?, ?, ?, ?, ?, ?)";
+                + " ?, ?, ?, ?, ?, ?, ?, ?);";
 
         //É usado para criar um objeto que representa a instrução SQL que será executada
         //Função invocada atraves da Connection
@@ -79,7 +79,7 @@ public class DAO_Adicionar implements DataAcessObject {
              */
             //City city = new City(id,cidade,microregiao,estado,regiaogeografica,"
             //+"areakm,populacao,domicilios,pibTotal,idh_geral,renda_media,renda_nominal,pea_dia,idh_educacao,idh_longevidade);
-            pstmt.setString(1, cidade.getId());
+            pstmt.setInt(1, Integer.parseInt(cidade.getId()));
             pstmt.setString(2, cidade.getMunicipio());
             pstmt.setString(3, cidade.getMicroregiao());
             pstmt.setString(4, cidade.getEstado());
@@ -95,7 +95,7 @@ public class DAO_Adicionar implements DataAcessObject {
             pstmt.setDouble(14, cidade.getIdhEducacao());
             pstmt.setDouble(15, cidade.getIdhLongevidade());
             
-            int linhasAlteradas = pstmt.executeUpdate(sql);
+            int linhasAlteradas = pstmt.executeUpdate();
             if (linhasAlteradas > 0) {
                 return true;
             } else {

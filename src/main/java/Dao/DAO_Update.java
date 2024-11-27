@@ -32,7 +32,7 @@ import java.util.LinkedList;
  */
 public class DAO_Update implements DataAcessObject {
     
-    public boolean update(City cidade, int idInformado) throws SQLException {
+    public boolean update(City cidade) throws SQLException {
         Connection connection = conexao.conectar();
         //É usado para criar um objeto que representa a instrução SQL que será executada
         //Função invocada atraves da Connection
@@ -40,11 +40,11 @@ public class DAO_Update implements DataAcessObject {
         //Resultado que irá receber no banco de dados em SQL
         //Resultado é um looping automatico
         
-        String sql = "UPDATE cidades SET id = ?, cidade = ?, microregiao = ?,"
+        String sql = "UPDATE cidade SET cidade = ?, microregiao = ?,"
                 + " estado = ?, regiaogeografica = ?, areakm = ?, populacao = ?,"
-                + " domicilios = ?, pibTotal idh_geral = ?, renda_media = ?,"
-                + " renda_nominal = ?, pea_dia = ?, idh_educacao = ?, idh_logevidade = ?"
-                + " WHERE id ="+idInformado;
+                + " domicilios = ?, pib_total = ?, idh_geral = ?, renda_media = ?,"
+                + " renda_nominal = ?, pea_dia = ?, idh_educacao = ?, idh_longevidade = ?"
+                + " WHERE id ="+cidade.getId()+";";
         /*
         ResultSet resultado = statement.executeQuery("UPDATE cidades SET id = ?, cidade = ?, microregiao = ?,"
                 + " estado = ?, regiaogeografica = ?, areakm = ?, populacao = ?,"
@@ -79,23 +79,23 @@ public class DAO_Update implements DataAcessObject {
              */
             //City city = new City(id,cidade,microregiao,estado,regiaogeografica,"
             //+"areakm,populacao,domicilios,pibTotal,idh_geral,renda_media,renda_nominal,pea_dia,idh_educacao,idh_longevidade);
-            pstmt.setString(1, cidade.getId());
-            pstmt.setString(2, cidade.getMunicipio());
-            pstmt.setString(3, cidade.getMicroregiao());
-            pstmt.setString(4, cidade.getEstado());
-            pstmt.setString(5, cidade.getRegiaoGeografica());
-            pstmt.setDouble(6, cidade.getArea());
-            pstmt.setInt(7, (int)(cidade.getPopulacao()));
-            pstmt.setDouble(8, cidade.getDomicilios());
-            pstmt.setDouble(9, cidade.getPibTotal());
-            pstmt.setDouble(10, cidade.getIdh());
-            pstmt.setDouble(11, cidade.getRendaMedia());
-            pstmt.setDouble(12, cidade.getRendaNominal());
-            pstmt.setDouble(13, cidade.getPea());
-            pstmt.setDouble(14, cidade.getIdhEducacao());
-            pstmt.setDouble(15, cidade.getIdhLongevidade());
+            //pstmt.setString(1, cidade.getId());
+            pstmt.setString(1, cidade.getMunicipio());
+            pstmt.setString(2, cidade.getMicroregiao());
+            pstmt.setString(3, cidade.getEstado());
+            pstmt.setString(4, cidade.getRegiaoGeografica());
+            pstmt.setDouble(5, cidade.getArea());
+            pstmt.setInt(6, (int)(cidade.getPopulacao()));
+            pstmt.setDouble(7, cidade.getDomicilios());
+            pstmt.setDouble(8, cidade.getPibTotal());
+            pstmt.setDouble(9, cidade.getIdh());
+            pstmt.setDouble(10, cidade.getRendaMedia());
+            pstmt.setDouble(11, cidade.getRendaNominal());
+            pstmt.setDouble(12, cidade.getPea());
+            pstmt.setDouble(13, cidade.getIdhEducacao());
+            pstmt.setDouble(14, cidade.getIdhLongevidade());
             
-            int linhasAlteradas = pstmt.executeUpdate(sql);
+            int linhasAlteradas = pstmt.executeUpdate();
             if (linhasAlteradas > 0) {
                 return true;
             } else {
@@ -104,4 +104,3 @@ public class DAO_Update implements DataAcessObject {
         }
     }
 }
-
