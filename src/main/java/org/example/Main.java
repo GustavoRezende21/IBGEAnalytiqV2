@@ -18,16 +18,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package org.example;
-import Model.City;
-import Services.*;
-import Services.Update;
 import Swing.TelaLogin;
-import Utils.Reader;
-import Utils.Writer;
-import javax.swing.*;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import Utils.Conexao;
 
 /**

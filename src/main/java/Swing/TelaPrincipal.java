@@ -22,9 +22,12 @@ package Swing;
 
 import Model.City;
 import Services.Lista;
+import Services.Read;
 import Swing.Filters.LetterFilter;
 import Swing.Filters.NumberOnlyFilter;
 import Swing.Filters.NumberFilter;
+
+import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -44,7 +47,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
      * Creates new form TelaPrincipal
      */
     Lista lista;
-    public TelaPrincipal() {
+    public TelaPrincipal() throws SQLException {
         lista = new Lista();
         System.out.println("eu sou a lista instanciada na tela principal");
         //lista.sizeList();
@@ -222,7 +225,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
         //lista.sizeList();
         int linhaSelecionada = Table.getSelectedRow();
         if(linhaSelecionada != -1){
-            Editar telaEditar = new Editar();
+            int id = (int) Table.getValueAt(linhaSelecionada,0);
+            Editar telaEditar = null;
+            try {
+                telaEditar = new Editar(id);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
             telaEditar.setVisible(true);
         }
         System.out.println("Tamanho da lista após o processamento do botão editar");
@@ -236,7 +245,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         //lista.sizeList();
         int linhaSelecionada = Table.getSelectedRow();
         if(linhaSelecionada != -1){
-            Deletar telaDeletar = new Deletar(linhaSelecionada, this);
+            int id = (int) Table.getValueAt(linhaSelecionada,0);
+            Deletar telaDeletar = new Deletar(id, this);
             telaDeletar.setVisible(true);
         }
         System.out.println("Tamanho da lista após o processamento do botão deletar");
@@ -256,15 +266,25 @@ public class TelaPrincipal extends javax.swing.JFrame {
         System.out.println("Tamanho da lista quando aperto botão buscar");
         //lista.sizeList();
         String IdBusca = TextFieldBuscar.getText();
-        Buscar telaBuscar = new Buscar(Integer.parseInt(IdBusca),this.lista);
+        Buscar telaBuscar = null;
+        try {
+            telaBuscar = new Buscar(Integer.parseInt(IdBusca));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         telaBuscar.setVisible(true);
         System.out.println("Tamanho da lista após o processamento do botão buscar");
         //lista.sizeList();
     }//GEN-LAST:event_BuscarButtonActionPerformed
 
     private void RelatorioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RelatorioButtonActionPerformed
-        
-        Relatorio relatorio = new Relatorio();
+
+        Relatorio relatorio = null;
+        try {
+            relatorio = new Relatorio();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         relatorio.setVisible(true);
         
     }//GEN-LAST:event_RelatorioButtonActionPerformed
@@ -317,37 +337,37 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     }
     
-    private void preencherTabela(){
+    private void preencherTabela() throws SQLException {
         
         DefaultTableModel model = (DefaultTableModel) Table.getModel();
-        
+        Read read = new Read();
         //ArrayList<City> cidades = lista.getCidades();
-        
+        ArrayList<City> cidades = read.buscarTodos();
         Object rowData[] = new Object[21];
          
-        for(int i = 0; i < lista.getCidades().size(); i++){
+        for(int i = 0; i < cidades.size(); i++){
             
-            rowData[0] = lista.getCidades().get(i).getId();
-            rowData[1] = lista.getCidades().get(i).getMunicipio();
-            rowData[2] = lista.getCidades().get(i).getMicroregiao();
-            rowData[3] = lista.getCidades().get(i).getEstado();
-            rowData[4] = lista.getCidades().get(i).getRegiaoGeografica();
-            rowData[5] = lista.getCidades().get(i).getArea();
-            rowData[6] = lista.getCidades().get(i).getPopulacao();
-            rowData[7] = lista.getCidades().get(i).getDomicilios();
-            rowData[8] = lista.getCidades().get(i).getPibTotal();
-            rowData[9] = lista.getCidades().get(i).getIdh();
-            rowData[10] = lista.getCidades().get(i).getRendaMedia();
-            rowData[11] = lista.getCidades().get(i).getRendaNominal();
-            rowData[12] = lista.getCidades().get(i).getPea();
-            rowData[13] = lista.getCidades().get(i).getIdhEducacao();
-            rowData[14] = lista.getCidades().get(i).getIdhLongevidade();
-            rowData[15] = lista.getCidades().get(i).getDensidadeDemografica();
-            rowData[16] = lista.getCidades().get(i).getClassficacaoIDH();
-            rowData[17] = lista.getCidades().get(i).getPibPcTotal();
-            rowData[18] = lista.getCidades().get(i).getUltimaAtualizacao();
-            rowData[19] = lista.getCidades().get(i).getClassificacaoIDHEdu();
-            rowData[20] = lista.getCidades().get(i).getClassificacaoIDHLongevidade();
+            rowData[0] = cidades.get(i).getId();
+            rowData[1] = cidades.get(i).getMunicipio();
+            rowData[2] = cidades.get(i).getMicroregiao();
+            rowData[3] = cidades.get(i).getEstado();
+            rowData[4] = cidades.get(i).getRegiaoGeografica();
+            rowData[5] = cidades.get(i).getArea();
+            rowData[6] = cidades.get(i).getPopulacao();
+            rowData[7] = cidades.get(i).getDomicilios();
+            rowData[8] = cidades.get(i).getPibTotal();
+            rowData[9] = cidades.get(i).getIdh();
+            rowData[10] = cidades.get(i).getRendaMedia();
+            rowData[11] = cidades.get(i).getRendaNominal();
+            rowData[12] = cidades.get(i).getPea();
+            rowData[13] = cidades.get(i).getIdhEducacao();
+            rowData[14] = cidades.get(i).getIdhLongevidade();
+            rowData[15] = cidades.get(i).getDensidadeDemografica();
+            rowData[16] = cidades.get(i).getClassficacaoIDH();
+            rowData[17] = cidades.get(i).getPibPcTotal();
+            rowData[18] = cidades.get(i).getUltimaAtualizacao();
+            rowData[19] = cidades.get(i).getClassificacaoIDHEdu();
+            rowData[20] = cidades.get(i).getClassificacaoIDHLongevidade();
             model.addRow(rowData);
         }
         

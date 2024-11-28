@@ -20,10 +20,9 @@
 package Services;
 
 import Dao.DAO_Deletar;
-import Model.City;
-import Utils.Writer;
+
 import java.sql.SQLException;
-import java.util.ArrayList;
+
 /**
  *
  * @author Gabriel Cândido Ribeiro da Silva <gcrs2018@gmail.com>

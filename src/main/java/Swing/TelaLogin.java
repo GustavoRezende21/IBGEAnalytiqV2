@@ -20,6 +20,7 @@
 package Swing;
 
 import javax.swing.JOptionPane;
+import java.sql.SQLException;
 
 /**
  *
@@ -65,7 +66,11 @@ public class TelaLogin extends javax.swing.JFrame {
         LoginButton.setText("Login");
         LoginButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LoginButtonActionPerformed(evt);
+                try {
+                    LoginButtonActionPerformed(evt);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
 
@@ -118,7 +123,7 @@ public class TelaLogin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
+    private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {//GEN-FIRST:event_LoginButtonActionPerformed
             String login = LoginTextField.getText();
             String senha = PasswordField.getText();
             

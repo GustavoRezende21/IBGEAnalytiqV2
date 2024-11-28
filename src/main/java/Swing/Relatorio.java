@@ -45,7 +45,7 @@ public class Relatorio extends javax.swing.JFrame {
     City piorIdhEdu;
     City maiorPibTotal;
     City menorPibTotal;
-    public Relatorio(Lista lista) throws SQLException {
+    public Relatorio() throws SQLException {
         
         initComponents();
         

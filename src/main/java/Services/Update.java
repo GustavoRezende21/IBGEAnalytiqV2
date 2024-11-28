@@ -21,14 +21,9 @@ package Services;
 
 import Dao.DAO_Atualizar;
 import Model.City;
-import Utils.Writer;
+
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Scanner;
+
 /**
  *
  * @author Gabriel Cândido Ribeiro da Silva <gcrs2018@gmail.com>
