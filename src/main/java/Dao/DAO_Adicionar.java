@@ -51,7 +51,9 @@ public class DAO_Adicionar implements DataAcessObject {
                 + " domicilios, pib_total, idh_geral, renda_media, renda_nominal, pea_dia,"
                 + " idh_educacao, idh_longevidade) VALUES (?, ?, ?, ?, ?, ?, ?,"
                 + " ?, ?, ?, ?, ?, ?, ?, ?);";
-
+        
+        System.out.println("EXECUTED QUERY IS");
+        System.out.println(sql);
         //É usado para criar um objeto que representa a instrução SQL que será executada
         //Função invocada atraves da Connection
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {

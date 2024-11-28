@@ -45,6 +45,8 @@ public class Deletar extends javax.swing.JFrame {
     private City cidade;
     private TelaPrincipal telaPrincipal;
     public Deletar(int id, TelaPrincipal telaPrincipal) {
+        this.id = id;
+        System.out.println("O ID INFORMADO PARA A DELETE É: "+this.id);
         initComponents();
         //this.cidade = lista.getCidades().get(id);
         //idCitySelect.setText(cidade.getMunicipio());
@@ -147,7 +149,7 @@ public class Deletar extends javax.swing.JFrame {
 
         Delete delete = new Delete();
         
-        idCitySelect.setText(cidade.getMunicipio());
+        //idCitySelect.setText(cidade.getMunicipio());
         try {
             delete.DeleteById(id);
         } catch (SQLException ex) {

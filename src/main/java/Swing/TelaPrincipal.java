@@ -244,9 +244,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
         System.out.println("Tamanho da lista quando aperto botão deletar");
         //lista.sizeList();
         int linhaSelecionada = Table.getSelectedRow();
+        System.out.println("EU SEI QUAL A LINHA SELECIONADA, É A LINHA: "+linhaSelecionada);
         if(linhaSelecionada != -1){
-            int id = (int) Table.getValueAt(linhaSelecionada,0);
-            Deletar telaDeletar = new Deletar(id, this);
+            Object id = Table.getValueAt(linhaSelecionada,0);
+            System.out.println("NA LINHA SELECIONADA EU VEJO QUE O ID DELA É DE:" + id.toString());
+            //System.out.println("A VARIÁVEL idNum é do tipo: "+" E EU FIZ UM CASTING PARA QUE O VALOR NO idNum seja: " + idNum);
+            int idNum = Integer.parseInt(id.toString());
+            System.out.println("A VARIÁVEL idNum EU FIZ UM CASTING PARA QUE O VALOR NO idNum seja: " + idNum);
+
+            Deletar telaDeletar = new Deletar(idNum, this);
             telaDeletar.setVisible(true);
         }
         System.out.println("Tamanho da lista após o processamento do botão deletar");
