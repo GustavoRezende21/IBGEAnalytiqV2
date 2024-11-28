@@ -43,10 +43,10 @@ public class Criar extends javax.swing.JFrame {
     /**
      * Creates new form Edicao
      */
-    Lista lista;
+    //Lista lista;
     TelaPrincipal telaPrincipal;
     public Criar(Lista lista, TelaPrincipal telaPrincipal) {
-        this.lista = lista;
+        //this.lista = lista;
         this.telaPrincipal = telaPrincipal;
         initComponents();
         this.setLocationRelativeTo(null);
@@ -326,10 +326,11 @@ public class Criar extends javax.swing.JFrame {
         
         try {
             create.createCity(cidadeNova);
+            telaPrincipal.AtualizarTabela();
         } catch (SQLException ex) {
             Logger.getLogger(Criar.class.getName()).log(Level.SEVERE, null, ex);
         }
-        telaPrincipal.adicionarRow(cidadeNova);
+        //telaPrincipal.adicionarRow(cidadeNova);
         dispose();
         
         

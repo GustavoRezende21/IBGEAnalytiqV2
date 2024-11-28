@@ -22,6 +22,7 @@ package Services;
 import Dao.DAO_Consultar;
 import Dao.DAO_Ordenacao;
 import Model.City;
+import Utils.Ordenacoes;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -47,6 +48,11 @@ public class Read {
         //LinkedList<City> cidades = daoOrdenacao.semOrdem();
         //converte a LinkedList em um arraylist e já atribui
         ArrayList<City> cidades = new ArrayList<>(daoOrdenacao.semOrdem());
+        return cidades;
+    }
+    
+        public ArrayList<City> buscarOrdenado(Ordenacoes ordenacao) throws SQLException {
+        ArrayList<City> cidades = new ArrayList<>(daoOrdenacao.ordenacao(ordenacao));
         return cidades;
     }
 

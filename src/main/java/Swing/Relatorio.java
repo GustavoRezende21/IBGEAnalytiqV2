@@ -629,33 +629,57 @@ public class Relatorio extends javax.swing.JFrame {
     }//GEN-LAST:event_FecharButtonActionPerformed
 
     private void DetalhesMelhorPibActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DetalhesMelhorPibActionPerformed
-        Detalhes detalhes = new Detalhes(this.melhorPib);
-        detalhes.setVisible(true);
+        try {
+            Detalhes detalhes = new Detalhes(MelhorPib());
+            detalhes.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(Relatorio.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_DetalhesMelhorPibActionPerformed
 
     private void DetalhesPiorPibActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DetalhesPiorPibActionPerformed
-        Detalhes detalhes = new Detalhes(this.piorPib);
-        detalhes.setVisible(true);        
+        try {
+            Detalhes detalhes = new Detalhes(PiorPib());        
+            detalhes.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(Relatorio.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_DetalhesPiorPibActionPerformed
 
     private void DatelhesMelhorIdhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DatelhesMelhorIdhActionPerformed
-        Detalhes detalhes = new Detalhes(this.melhorIdhEdu);
-        detalhes.setVisible(true);
+        try {
+            Detalhes detalhes = new Detalhes(melhorIdhEdu());
+            detalhes.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(Relatorio.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_DatelhesMelhorIdhActionPerformed
 
     private void DetalhesPìorIdhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DetalhesPìorIdhActionPerformed
-        Detalhes detalhes = new Detalhes(this.piorIdhEdu);
-        detalhes.setVisible(true);
+        try {
+            Detalhes detalhes = new Detalhes(piorIdhEdu());
+            detalhes.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(Relatorio.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_DetalhesPìorIdhActionPerformed
 
     private void DetalhesMaiorPibTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DetalhesMaiorPibTotalActionPerformed
-        Detalhes detalhes = new Detalhes(this.maiorPibTotal);
-        detalhes.setVisible(true);
+        try {
+            Detalhes detalhes = new Detalhes(MaiorPibCidade());
+            detalhes.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(Relatorio.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_DetalhesMaiorPibTotalActionPerformed
 
     private void DetalhesMenorPibTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DetalhesMenorPibTotalActionPerformed
-        Detalhes detalhes = new Detalhes(this.menorPibTotal);
-        detalhes.setVisible(true);
+        try {
+            Detalhes detalhes = new Detalhes(MenorPibCidade());
+            detalhes.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(Relatorio.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_DetalhesMenorPibTotalActionPerformed
 
     /**

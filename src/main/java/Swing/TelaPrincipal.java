@@ -226,8 +226,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_CreateButtonActionPerformed
 
     private void EditarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditarButtonActionPerformed
-        System.out.println("Tamanho da lista quando aperto botão editar");
-        //lista.sizeList();
+        
+        System.out.println("ENTREI NO EDITAR");
+        
         Read read = new Read();
         Update update = new Update();
         
@@ -243,13 +244,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
             try {
                 telaEditar = new Editar(idNum, this);
                 telaEditar.setVisible(true);
+                //preencherTabela();
             } catch (SQLException ex) {
                 Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         }
-        System.out.println("Tamanho da lista após o processamento do botão editar");
-        //lista.sizeList();
+        
 
         
     }//GEN-LAST:event_EditarButtonActionPerformed
@@ -268,6 +269,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
             Deletar telaDeletar = new Deletar(idNum, this);
             telaDeletar.setVisible(true);
+
         }
         System.out.println("Tamanho da lista após o processamento do botão deletar");
         //lista.sizeList();
@@ -283,8 +285,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_DeletarButtonActionPerformed
 
     private void BuscarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarButtonActionPerformed
-        System.out.println("Tamanho da lista quando aperto botão buscar");
-        //lista.sizeList();
+        
         String IdBusca = TextFieldBuscar.getText();
         Buscar telaBuscar = null;
         try {
@@ -357,7 +358,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     }
     
-    private void preencherTabela() throws SQLException {
+    public void preencherTabela() throws SQLException {
         
         DefaultTableModel model = (DefaultTableModel) Table.getModel();
         Read read = new Read();
@@ -396,6 +397,43 @@ public class TelaPrincipal extends javax.swing.JFrame {
         Table.setRowSorter(sorter);
         */ //está bugando por enquanto
     }
+    
+    public void AtualizarTabela() throws SQLException {
+    DefaultTableModel model = (DefaultTableModel) Table.getModel();
+
+    // Limpar a tabela antes de adicionar novas linhas
+    model.setRowCount(0); // Limpa as linhas da tabela
+
+    Read read = new Read();
+    ArrayList<City> cidades = read.buscarTodos();
+    Object rowData[] = new Object[21];
+         
+    for (int i = 0; i < cidades.size(); i++) {
+        rowData[0] = cidades.get(i).getId();
+        rowData[1] = cidades.get(i).getMunicipio();
+        rowData[2] = cidades.get(i).getMicroregiao();
+        rowData[3] = cidades.get(i).getEstado();
+        rowData[4] = cidades.get(i).getRegiaoGeografica();
+        rowData[5] = cidades.get(i).getArea();
+        rowData[6] = cidades.get(i).getPopulacao();
+        rowData[7] = cidades.get(i).getDomicilios();
+        rowData[8] = cidades.get(i).getPibTotal();
+        rowData[9] = cidades.get(i).getIdh();
+        rowData[10] = cidades.get(i).getRendaMedia();
+        rowData[11] = cidades.get(i).getRendaNominal();
+        rowData[12] = cidades.get(i).getPea();
+        rowData[13] = cidades.get(i).getIdhEducacao();
+        rowData[14] = cidades.get(i).getIdhLongevidade();
+        rowData[15] = cidades.get(i).getDensidadeDemografica();
+        rowData[16] = cidades.get(i).getClassficacaoIDH();
+        rowData[17] = cidades.get(i).getPibPcTotal();
+        rowData[18] = cidades.get(i).getUltimaAtualizacao();
+        rowData[19] = cidades.get(i).getClassificacaoIDHEdu();
+        rowData[20] = cidades.get(i).getClassificacaoIDHLongevidade();
+        model.addRow(rowData);
+    }
+}
+
     
     /**
      * @param args the command line arguments

@@ -382,10 +382,10 @@ public class Editar extends javax.swing.JFrame {
         
         try {
             update.UpdateById(cidade);
+            telaPrincipal.AtualizarTabela();
         } catch (SQLException ex) {
             Logger.getLogger(Editar.class.getName()).log(Level.SEVERE, null, ex);
         }
-        telaPrincipal.adicionarRow(cidade);
         dispose();
         
         //update.UpdateById(i, lista, cidadeEditar);
