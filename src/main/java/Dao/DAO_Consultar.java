@@ -34,8 +34,12 @@ public class DAO_Consultar implements DataAcessObject {
 
         Connection connection = conexao.conectar();
         Statement statement = connection.createStatement();
-        ResultSet resultado = statement.executeQuery("SELECT * FROM cidade WHERE cidade.id="+idInformado+";");
+        String sql = "SELECT * FROM cidade WHERE cidade.id="+idInformado+";";
+        ResultSet resultado = statement.executeQuery(sql);
 
+        System.out.println("EXECUTED QUERY IS");
+        System.out.println(sql);
+        
         LinkedList<City> cidades = new LinkedList<City>();
 
         //City[] cidades = new City[300];

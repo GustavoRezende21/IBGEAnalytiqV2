@@ -22,7 +22,7 @@ public class DAO_Deletar implements DataAcessObject{
         Statement statement = connection.createStatement();
 
 
-        String sql ="DELETE FROM "+"cidade WHERE "+"cidade.id ="+id;
+        String sql ="DELETE FROM cidade WHERE cidade.id ="+id;
         System.out.println("EXECUTED QUERY IS");
         System.out.println(sql);
         int linhasAfetadas = statement.executeUpdate(sql);

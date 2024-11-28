@@ -95,9 +95,10 @@ public class DAO_Atualizar implements DataAcessObject {
             pstmt.setDouble(13, cidade.getIdhEducacao());
             pstmt.setDouble(14, cidade.getIdhLongevidade());
             
+            /*
             System.out.println("EXECUTED QUERY IS");
             System.out.println(sql);
-            
+            */
             int linhasAlteradas = pstmt.executeUpdate();
             if (linhasAlteradas > 0) {
                 return true;

@@ -51,8 +51,8 @@ public class Editar extends javax.swing.JFrame {
     int indexDaCidadeEditada;
     TelaPrincipal telaPrincipal;
     City cidadeEditar;
-    public Editar(int id) throws SQLException {
-     
+    public Editar(int id,TelaPrincipal telaPrincipal) throws SQLException {
+        
         this.telaPrincipal = telaPrincipal;
         initComponents();
         this.setLocationRelativeTo(null);

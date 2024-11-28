@@ -23,12 +23,15 @@ package Swing;
 import Model.City;
 import Services.Lista;
 import Services.Read;
+import Services.Update;
 import Swing.Filters.LetterFilter;
 import Swing.Filters.NumberOnlyFilter;
 import Swing.Filters.NumberFilter;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
@@ -225,16 +228,25 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void EditarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditarButtonActionPerformed
         System.out.println("Tamanho da lista quando aperto botão editar");
         //lista.sizeList();
+        Read read = new Read();
+        Update update = new Update();
+        
         int linhaSelecionada = Table.getSelectedRow();
+        System.out.println("EU SEI QUAL A LINHA SELECIONADA, É A LINHA: "+linhaSelecionada);
+       
         if(linhaSelecionada != -1){
-            int id = (int) Table.getValueAt(linhaSelecionada,0);
-            Editar telaEditar = null;
+            Object id = Table.getValueAt(linhaSelecionada,0);
+            System.out.println("NA LINHA SELECIONADA EU VEJO QUE O ID DELA É DE:" + id.toString());
+            int idNum = Integer.parseInt(id.toString());
+            
+            Editar telaEditar;
             try {
-                telaEditar = new Editar(id);
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
+                telaEditar = new Editar(idNum, this);
+                telaEditar.setVisible(true);
+            } catch (SQLException ex) {
+                Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }
-            telaEditar.setVisible(true);
+
         }
         System.out.println("Tamanho da lista após o processamento do botão editar");
         //lista.sizeList();
