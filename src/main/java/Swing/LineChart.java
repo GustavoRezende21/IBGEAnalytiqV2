@@ -7,28 +7,27 @@ import java.awt.Font;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.annotations.XYTextAnnotation;
-import org.jfree.chart.block.BlockBorder;
-import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
-import org.jfree.chart.title.TextTitle;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
 public class LineChart extends JFrame {
+
     public LineChart() {
         XYDataset dataset = createDataset();
-        JFreeChart chart = createChart(dataset);  // Create chart here
+        JFreeChart chart = createChart(dataset);
 
         // Criando o ChartPanel com zoom e arraste habilitado
         ChartPanel chartPanel = new ChartPanel(chart);
@@ -38,54 +37,48 @@ public class LineChart extends JFrame {
 
         // Habilitando o zoom com a roda do mouse
         chartPanel.setMouseWheelEnabled(true); // Habilita zoom com a roda do mouse
-        chartPanel.setMouseZoomable(true, false); // Permite zoom apenas no eixo X
-        // O ChartPanel já permite panning (arraste) por padrão, então não é necessário chamar setMouseDragged.
-
+        chartPanel.setMouseZoomable(true, true); // Permite zoom apenas no eixo X
         add(chartPanel);
 
         pack();
         setTitle("IDH por População");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
     private XYDataset createDataset() {
         XYSeriesCollection dataset = new XYSeriesCollection();
-
-        // Usando a classe Conexao para conectar ao banco de dados
         Conexao conexao = new Conexao();
-        try (Connection conn = conexao.conectar(); Statement stmt = conn.createStatement()) {
 
-            // Consulta SQL para Goiânia
-            String queryGoiania = "SELECT populacao, idh_geral, cidade FROM cidade WHERE microregiao = 'Goiânia'";
-            ResultSet rsGoiania = stmt.executeQuery(queryGoiania);
+        String query = "SELECT populacao, idh_geral, cidade, microregiao FROM cidade "
+                + "WHERE microregiao IN ('Goiânia', 'Anápolis')";
+
+        try (Connection conn = conexao.conectar(); Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(query)) {
 
             XYSeries goianiaSeries = new XYSeries("Goiânia");
-            while (rsGoiania.next()) {
-                double populacao = rsGoiania.getDouble("populacao");
-                double idh = rsGoiania.getDouble("idh_geral");
-                String cidade = rsGoiania.getString("cidade");
-                goianiaSeries.add(idh, populacao);  // Trocar a ordem: IDH no eixo X e População no eixo Y
-            }
-            dataset.addSeries(goianiaSeries);
-
-            // Consulta SQL para Anápolis
-            String queryAnapolis = "SELECT populacao, idh_geral, cidade FROM cidade WHERE microregiao = 'Anápolis'";
-            ResultSet rsAnapolis = stmt.executeQuery(queryAnapolis);
-
             XYSeries anapolisSeries = new XYSeries("Anápolis");
-            while (rsAnapolis.next()) {
-                double populacao = rsAnapolis.getDouble("populacao");
-                double idh = rsAnapolis.getDouble("idh_geral");
-                String cidade = rsAnapolis.getString("cidade");
-                anapolisSeries.add(idh, populacao);  // Trocar a ordem: IDH no eixo X e População no eixo Y
+
+            while (rs.next()) {
+                double populacao = rs.getDouble("populacao");
+                double idh = rs.getDouble("idh_geral");
+                String cidade = rs.getString("cidade");
+                String microregiao = rs.getString("microregiao");
+
+                if (microregiao.equals("Goiânia")) {
+                    goianiaSeries.add(idh, populacao);
+                    cityMap.put(idh + "," + populacao, cidade); // Salvar cidade para o ponto
+                } else if (microregiao.equals("Anápolis")) {
+                    anapolisSeries.add(idh, populacao);
+                    cityMap.put(idh + "," + populacao, cidade); // Salvar cidade para o ponto
+                }
             }
+
+            dataset.addSeries(goianiaSeries);
             dataset.addSeries(anapolisSeries);
-            conexao.desconectar();
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
         return dataset;
     }
 
@@ -122,60 +115,33 @@ public class LineChart extends JFrame {
         plot.setDomainGridlinePaint(Color.BLACK);
 
         // Adicionar as anotações (nomes das cidades) após o gráfico ser criado
-        addAnnotationsToPlot(plot);
-        
+        addAnnotationsToPlot(plot, dataset);
+
         return chart;
     }
 
-    private void addAnnotationsToPlot(XYPlot plot) {
-        // Adicionar as anotações (nomes das cidades) após o gráfico ser criado
-        Conexao conexao = new Conexao();
-        try (Connection conn = conexao.conectar(); Statement stmt = conn.createStatement()) {
+    private void addAnnotationsToPlot(XYPlot plot, XYDataset dataset) {
+        for (int i = 0; i < dataset.getSeriesCount(); i++) {
+            XYSeries series = ((XYSeriesCollection) dataset).getSeries(i);
 
-            // Consulta SQL para Goiânia
-            String queryGoiania = "SELECT populacao, idh_geral, cidade FROM cidade WHERE microregiao = 'Goiânia'";
-            ResultSet rsGoiania = stmt.executeQuery(queryGoiania);
-            while (rsGoiania.next()) {
-                double populacao = rsGoiania.getDouble("populacao");
-                double idh = rsGoiania.getDouble("idh_geral");
-                String cidade = rsGoiania.getString("cidade");
+            for (int j = 0; j < series.getItemCount(); j++) {
+                double idh = series.getX(j).doubleValue();
+                double populacao = series.getY(j).doubleValue();
+                String key = idh + "," + populacao; // Usar a mesma chave que foi salva no cityMap
 
-                // Adicionar anotação para Goiânia
-                XYTextAnnotation annotation = new XYTextAnnotation(cidade, idh, populacao);
-                annotation.setFont(new Font("Arial", Font.PLAIN, 12));
-                annotation.setPaint(Color.BLACK); // Cor do texto
-                plot.addAnnotation(annotation);
+                // Obter o nome da cidade correspondente
+                String cidade = cityMap.get(key);
+
+                if (cidade != null) { // Garantir que a cidade foi encontrada
+                    XYTextAnnotation annotation = new XYTextAnnotation(cidade, idh, populacao);
+                    annotation.setFont(new Font("Arial", Font.PLAIN, 12));
+                    annotation.setPaint(Color.BLACK);
+                    plot.addAnnotation(annotation);
+                }
             }
-
-            // Consulta SQL para Anápolis
-            String queryAnapolis = "SELECT populacao, idh_geral, cidade FROM cidade WHERE microregiao = 'Anápolis'";
-            ResultSet rsAnapolis = stmt.executeQuery(queryAnapolis);
-            while (rsAnapolis.next()) {
-                double populacao = rsAnapolis.getDouble("populacao");
-                double idh = rsAnapolis.getDouble("idh_geral");
-                String cidade = rsAnapolis.getString("cidade");
-
-                // Adicionar anotação para Anápolis
-                XYTextAnnotation annotation = new XYTextAnnotation(cidade, idh, populacao);
-                annotation.setFont(new Font("Arial", Font.PLAIN, 12));
-                annotation.setPaint(Color.BLACK); // Cor do texto
-                plot.addAnnotation(annotation);
-            }
-            conexao.desconectar();
-
-        } catch (Exception e) {
-            e.printStackTrace();
         }
-        conexao.desconectar();
     }
-    
-    
-    /*
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            LineChart example = new LineChart();
-            example.setVisible(true);
-        });
-    }
-    */
+
+    private Map<String, String> cityMap = new HashMap<>();
+
 }
