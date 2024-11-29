@@ -22,7 +22,6 @@ package Swing;
 import Model.City;
 import Services.Create;
 import Services.Delete;
-import Services.Lista;
 import Services.Read;
 import Services.Update;
 import Swing.Filters.LetterFilter;

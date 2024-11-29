@@ -21,7 +21,6 @@ package Swing;
 
 
 import Model.City;
-import Services.Lista;
 import Services.Read;
 import Services.Update;
 import Swing.Filters.LetterFilter;
@@ -51,11 +50,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form TelaPrincipal
      */
-    Lista lista;
     public TelaPrincipal() throws SQLException {
-        lista = new Lista();
-        System.out.println("eu sou a lista instanciada na tela principal");
-        //lista.sizeList();
         initComponents();
    
         preencherTabela();
@@ -64,7 +59,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         this.setExtendedState(MAXIMIZED_BOTH);
         
         //Setando os filtros
-        ((AbstractDocument) TextFieldBuscar.getDocument()).setDocumentFilter(new NumberOnlyFilter());
+        //((AbstractDocument) TextFieldBuscar.getDocument()).setDocumentFilter(new NumberOnlyFilter());
     }
     
     
@@ -182,7 +177,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        ComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Código IBGE", "Cidade", "Micro região", "Estado", "Região Geográfica", "Area KM²", "População", "Domicilios", "PIB Total", "IDH Geral", "Renda Média", "Renda Nominal", "PEA DIA", "IDH Educação", "IDH Longevidade" }));
+        ComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Código IBGE", "Cidade", "Micro-Região", "Estado", "Região-Geográfica", "Area", "População", "Domicilios", "PIB Total", "IDH Geral", "Renda Média", "Renda Nominal", "PEA DIA", "IDH Educação", "IDH Longevidade" }));
         ComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ComboBoxActionPerformed(evt);
@@ -247,7 +242,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void CreateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateButtonActionPerformed
-        Criar telaCriar = new Criar(this.lista, this);
+        Criar telaCriar = new Criar(this);
         telaCriar.setVisible(true);
         
     }//GEN-LAST:event_CreateButtonActionPerformed
@@ -372,7 +367,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
             break;
             
-            case "Micro região": {
+            case "Micro-Região": {
                 try {
                     this.AtualizarTabelaOrdenando(Ordenacoes.MICRO_REGIAO);
                 } catch (SQLException ex) {
@@ -390,7 +385,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
             break;
             
-            case "Região Geográfica": {
+            case "Região-Geográfica": {
                 try {
                     this.AtualizarTabelaOrdenando(Ordenacoes.REGIAO_GEOGRAFICA);
                 } catch (SQLException ex) {
@@ -399,7 +394,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
             break;
             
-            case "Area KM²": {
+            case "Area": {
                 try {
                     this.AtualizarTabelaOrdenando(Ordenacoes.AREA_KM);
                 } catch (SQLException ex) {

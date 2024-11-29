@@ -21,7 +21,6 @@ package Swing;
 
 import Model.City;
 import Services.Create;
-import Services.Lista;
 import Services.Read;
 import Services.Update;
 import java.sql.SQLException;
@@ -39,9 +38,7 @@ public class Buscar extends javax.swing.JFrame {
     /**
      * Creates new form Edicao
      */
-    int indexDaCidadeBuscada;
-    Lista lista;
-    
+    int indexDaCidadeBuscada;    
     public Buscar(int id) throws SQLException {
         
         initComponents();

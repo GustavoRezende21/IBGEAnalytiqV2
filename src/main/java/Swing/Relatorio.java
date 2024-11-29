@@ -20,7 +20,6 @@
 package Swing;
 
 import Model.City;
-import Services.Lista;
 import Services.Read;
 import java.sql.SQLException;
 import java.util.logging.Level;

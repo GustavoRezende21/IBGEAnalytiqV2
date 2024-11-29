@@ -21,7 +21,6 @@ package Swing;
 
 import Model.City;
 import Services.Create;
-import Services.Lista;
 import Services.Update;
 import Swing.Filters.LetterFilter;
 import Swing.Filters.NumberOnlyFilter;
@@ -45,7 +44,7 @@ public class Criar extends javax.swing.JFrame {
      */
     //Lista lista;
     TelaPrincipal telaPrincipal;
-    public Criar(Lista lista, TelaPrincipal telaPrincipal) {
+    public Criar(TelaPrincipal telaPrincipal) {
         //this.lista = lista;
         this.telaPrincipal = telaPrincipal;
         initComponents();

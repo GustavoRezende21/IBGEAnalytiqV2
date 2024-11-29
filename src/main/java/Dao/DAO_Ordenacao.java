@@ -59,12 +59,18 @@ public  class DAO_Ordenacao implements DataAcessObject {
         return cidades;
     }
     
-    public LinkedList<City> ordenacao(Enum Ordenacoes) throws SQLException {
+    public LinkedList<City> ordenacao(Ordenacoes Ordenacoes) throws SQLException {
 
         Connection connection = conexao.conectar();
         Statement statement = connection.createStatement();
-        ResultSet resultado = statement.executeQuery("SELECT * FROM cidade ORDER BY "+Ordenacoes+" ASC;");
-
+        
+        String sql = "SELECT * FROM cidade ORDER BY "+Ordenacoes.getValor()+" ASC;";
+        System.out.println("EXECUTED QUERY IS");
+        System.out.println(sql);
+        ResultSet resultado = statement.executeQuery(sql);
+        
+        
+        
         LinkedList<City> cidades = new LinkedList<City>();
 
         //City[] cidades = new City[300];
