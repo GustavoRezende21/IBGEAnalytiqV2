@@ -27,11 +27,13 @@ import Services.Update;
 import Swing.Filters.LetterFilter;
 import Swing.Filters.NumberOnlyFilter;
 import Swing.Filters.NumberFilter;
+import Utils.Ordenacoes;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
@@ -75,6 +77,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jComboBox1 = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         Table = new javax.swing.JTable();
         TextFieldBuscar = new javax.swing.JTextField();
@@ -87,6 +90,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         GraficoButton = new javax.swing.JButton();
         DetalhesButton = new javax.swing.JButton();
+        ComboBox = new javax.swing.JComboBox<>();
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("IBGE AnalytiQ");
@@ -176,6 +182,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        ComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Código IBGE", "Cidade", "Micro região", "Estado", "Região Geográfica", "Area KM²", "População", "Domicilios", "PIB Total", "IDH Geral", "Renda Média", "Renda Nominal", "PEA DIA", "IDH Educação", "IDH Longevidade" }));
+        ComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ComboBoxActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -190,7 +203,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
                         .addComponent(TextFieldBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(BuscarButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
+                        .addGap(121, 121, 121)
+                        .addComponent(ComboBox, 0, 262, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(DetalhesButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(GraficoButton))
@@ -222,7 +237,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                             .addComponent(DeletarButton)
                             .addComponent(RelatorioButton)
                             .addComponent(GraficoButton)
-                            .addComponent(DetalhesButton))))
+                            .addComponent(DetalhesButton)
+                            .addComponent(ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 477, Short.MAX_VALUE))
         );
@@ -334,6 +350,144 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }    
               }//GEN-LAST:event_DetalhesButtonActionPerformed
 
+    private void ComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBoxActionPerformed
+        String opcaoOrdenacao = (String) ComboBox.getSelectedItem();
+        
+        switch(opcaoOrdenacao){
+            case "Código IBGE": {
+                try {
+                    this.AtualizarTabelaOrdenando(Ordenacoes.ID);
+                } catch (SQLException ex) {
+                    Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            break;
+            
+            case "Cidade": {
+                try {
+                    this.AtualizarTabelaOrdenando(Ordenacoes.CIDADE);
+                } catch (SQLException ex) {
+                    Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            break;
+            
+            case "Micro região": {
+                try {
+                    this.AtualizarTabelaOrdenando(Ordenacoes.MICRO_REGIAO);
+                } catch (SQLException ex) {
+                    Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            break;
+            
+            case "Estado": {
+                try {
+                    this.AtualizarTabelaOrdenando(Ordenacoes.ESTADO);
+                } catch (SQLException ex) {
+                    Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            break;
+            
+            case "Região Geográfica": {
+                try {
+                    this.AtualizarTabelaOrdenando(Ordenacoes.REGIAO_GEOGRAFICA);
+                } catch (SQLException ex) {
+                    Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            break;
+            
+            case "Area KM²": {
+                try {
+                    this.AtualizarTabelaOrdenando(Ordenacoes.AREA_KM);
+                } catch (SQLException ex) {
+                    Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            break;
+            
+            case "População": {
+                try {
+                    this.AtualizarTabelaOrdenando(Ordenacoes.POPULACAO);
+                } catch (SQLException ex) {
+                    Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            break;            
+            case "Domicilios": {
+                try {
+                    this.AtualizarTabelaOrdenando(Ordenacoes.DOMICILIOS);
+                } catch (SQLException ex) {
+                    Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            break;
+
+            case "PIB Total": {
+                try {
+                    this.AtualizarTabelaOrdenando(Ordenacoes.PIB_TOTAL);
+                } catch (SQLException ex) {
+                    Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            break;
+
+            case "IDH Geral": {
+                try {
+                    this.AtualizarTabelaOrdenando(Ordenacoes.IDH_GERAL);
+                } catch (SQLException ex) {
+                    Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            break;
+            case "Renda Média": {
+                try {
+                    this.AtualizarTabelaOrdenando(Ordenacoes.RENDA_MEDIA);
+                } catch (SQLException ex) {
+                    Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            break;
+
+            case "Renda Nominal": {
+                try {
+                    this.AtualizarTabelaOrdenando(Ordenacoes.RENDA_NOMINAL);
+                } catch (SQLException ex) {
+                    Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            break;   
+            case "PEA DIA": {
+                try {
+                    this.AtualizarTabelaOrdenando(Ordenacoes.PEA_DIA);
+                } catch (SQLException ex) {
+                    Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            break;
+            case "IDH Educação": {
+                try {
+                    this.AtualizarTabelaOrdenando(Ordenacoes.IDH_EDUCACAO);
+                } catch (SQLException ex) {
+                    Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            break;  
+            case "IDH Longevidade": {
+                try {
+                    this.AtualizarTabelaOrdenando(Ordenacoes.IDH_LONGEVIDADE);
+                } catch (SQLException ex) {
+                    Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            break;  
+        }
+        
+        JOptionPane.showMessageDialog(this, "Foi ordenada por: " + opcaoOrdenacao);
+    }//GEN-LAST:event_ComboBoxActionPerformed
+
     public void removeRow(int row){
         //lista.sizeList();
         DefaultTableModel model = (DefaultTableModel) Table.getModel();
@@ -426,31 +580,67 @@ public class TelaPrincipal extends javax.swing.JFrame {
     ArrayList<City> cidades = read.buscarTodos();
     Object rowData[] = new Object[21];
          
-    for (int i = 0; i < cidades.size(); i++) {
-        rowData[0] = cidades.get(i).getId();
-        rowData[1] = cidades.get(i).getMunicipio();
-        rowData[2] = cidades.get(i).getMicroregiao();
-        rowData[3] = cidades.get(i).getEstado();
-        rowData[4] = cidades.get(i).getRegiaoGeografica();
-        rowData[5] = cidades.get(i).getArea();
-        rowData[6] = cidades.get(i).getPopulacao();
-        rowData[7] = cidades.get(i).getDomicilios();
-        rowData[8] = cidades.get(i).getPibTotal();
-        rowData[9] = cidades.get(i).getIdh();
-        rowData[10] = cidades.get(i).getRendaMedia();
-        rowData[11] = cidades.get(i).getRendaNominal();
-        rowData[12] = cidades.get(i).getPea();
-        rowData[13] = cidades.get(i).getIdhEducacao();
-        rowData[14] = cidades.get(i).getIdhLongevidade();
-        rowData[15] = cidades.get(i).getDensidadeDemografica();
-        rowData[16] = cidades.get(i).getClassficacaoIDH();
-        rowData[17] = cidades.get(i).getPibPcTotal();
-        rowData[18] = cidades.get(i).getUltimaAtualizacao();
-        rowData[19] = cidades.get(i).getClassificacaoIDHEdu();
-        rowData[20] = cidades.get(i).getClassificacaoIDHLongevidade();
-        model.addRow(rowData);
+        for (int i = 0; i < cidades.size(); i++) {
+            rowData[0] = cidades.get(i).getId();
+            rowData[1] = cidades.get(i).getMunicipio();
+            rowData[2] = cidades.get(i).getMicroregiao();
+            rowData[3] = cidades.get(i).getEstado();
+            rowData[4] = cidades.get(i).getRegiaoGeografica();
+            rowData[5] = cidades.get(i).getArea();
+            rowData[6] = cidades.get(i).getPopulacao();
+            rowData[7] = cidades.get(i).getDomicilios();
+            rowData[8] = cidades.get(i).getPibTotal();
+            rowData[9] = cidades.get(i).getIdh();
+            rowData[10] = cidades.get(i).getRendaMedia();
+            rowData[11] = cidades.get(i).getRendaNominal();
+            rowData[12] = cidades.get(i).getPea();
+            rowData[13] = cidades.get(i).getIdhEducacao();
+            rowData[14] = cidades.get(i).getIdhLongevidade();
+            rowData[15] = cidades.get(i).getDensidadeDemografica();
+            rowData[16] = cidades.get(i).getClassficacaoIDH();
+            rowData[17] = cidades.get(i).getPibPcTotal();
+            rowData[18] = cidades.get(i).getUltimaAtualizacao();
+            rowData[19] = cidades.get(i).getClassificacaoIDHEdu();
+            rowData[20] = cidades.get(i).getClassificacaoIDHLongevidade();
+            model.addRow(rowData);
+        }
     }
-}
+    
+    public void AtualizarTabelaOrdenando(Ordenacoes ordenacao) throws SQLException {
+    DefaultTableModel model = (DefaultTableModel) Table.getModel();
+
+    // Limpar a tabela antes de adicionar novas linhas
+    model.setRowCount(0); // Limpa as linhas da tabela
+
+    Read read = new Read();
+    ArrayList<City> cidades = read.buscarOrdenado(ordenacao);
+    Object rowData[] = new Object[21];
+         
+        for (int i = 0; i < cidades.size(); i++) {
+            rowData[0] = cidades.get(i).getId();
+            rowData[1] = cidades.get(i).getMunicipio();
+            rowData[2] = cidades.get(i).getMicroregiao();
+            rowData[3] = cidades.get(i).getEstado();
+            rowData[4] = cidades.get(i).getRegiaoGeografica();
+            rowData[5] = cidades.get(i).getArea();
+            rowData[6] = cidades.get(i).getPopulacao();
+            rowData[7] = cidades.get(i).getDomicilios();
+            rowData[8] = cidades.get(i).getPibTotal();
+            rowData[9] = cidades.get(i).getIdh();
+            rowData[10] = cidades.get(i).getRendaMedia();
+            rowData[11] = cidades.get(i).getRendaNominal();
+            rowData[12] = cidades.get(i).getPea();
+            rowData[13] = cidades.get(i).getIdhEducacao();
+            rowData[14] = cidades.get(i).getIdhLongevidade();
+            rowData[15] = cidades.get(i).getDensidadeDemografica();
+            rowData[16] = cidades.get(i).getClassficacaoIDH();
+            rowData[17] = cidades.get(i).getPibPcTotal();
+            rowData[18] = cidades.get(i).getUltimaAtualizacao();
+            rowData[19] = cidades.get(i).getClassificacaoIDHEdu();
+            rowData[20] = cidades.get(i).getClassificacaoIDHLongevidade();
+            model.addRow(rowData);
+        }
+    }
 
     
     /**
@@ -460,6 +650,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BuscarButton;
+    private javax.swing.JComboBox<String> ComboBox;
     private javax.swing.JButton CreateButton;
     private javax.swing.JButton DeletarButton;
     private javax.swing.JButton DetalhesButton;
@@ -468,6 +659,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton RelatorioButton;
     private javax.swing.JTable Table;
     private javax.swing.JTextField TextFieldBuscar;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;

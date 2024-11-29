@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.JComboBox" name="jComboBox1">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="4">
+            <StringItem index="0" value="Item 1"/>
+            <StringItem index="1" value="Item 2"/>
+            <StringItem index="2" value="Item 3"/>
+            <StringItem index="3" value="Item 4"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+  </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
     <Property name="title" type="java.lang.String" value="IBGE AnalytiQ"/>
@@ -34,7 +51,9 @@
                       <Component id="TextFieldBuscar" min="-2" pref="128" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="BuscarButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="86" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="121" max="-2" attributes="0"/>
+                      <Component id="ComboBox" pref="262" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="DetalhesButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="GraficoButton" min="-2" max="-2" attributes="0"/>
@@ -71,6 +90,7 @@
                           <Component id="RelatorioButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="GraficoButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="DetalhesButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="ComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -339,6 +359,35 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DetalhesButtonActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="ComboBox">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="15">
+            <StringItem index="0" value="C&#xf3;digo IBGE"/>
+            <StringItem index="1" value="Cidade"/>
+            <StringItem index="2" value="Micro regi&#xe3;o"/>
+            <StringItem index="3" value="Estado"/>
+            <StringItem index="4" value="Regi&#xe3;o Geogr&#xe1;fica"/>
+            <StringItem index="5" value="Area KM&#xb2;"/>
+            <StringItem index="6" value="Popula&#xe7;&#xe3;o"/>
+            <StringItem index="7" value="Domicilios"/>
+            <StringItem index="8" value="PIB Total"/>
+            <StringItem index="9" value="IDH Geral"/>
+            <StringItem index="10" value="Renda M&#xe9;dia"/>
+            <StringItem index="11" value="Renda Nominal"/>
+            <StringItem index="12" value="PEA DIA"/>
+            <StringItem index="13" value="IDH Educa&#xe7;&#xe3;o"/>
+            <StringItem index="14" value="IDH Longevidade"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ComboBoxActionPerformed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>
