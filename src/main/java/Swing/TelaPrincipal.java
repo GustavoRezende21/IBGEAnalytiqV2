@@ -86,6 +86,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         GraficoButton = new javax.swing.JButton();
+        DetalhesButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("IBGE AnalytiQ");
@@ -168,6 +169,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        DetalhesButton.setText("Detalhes");
+        DetalhesButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DetalhesButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -182,7 +190,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
                         .addComponent(TextFieldBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(BuscarButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 167, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
+                        .addComponent(DetalhesButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(GraficoButton))
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -211,7 +221,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                             .addComponent(EditarButton)
                             .addComponent(DeletarButton)
                             .addComponent(RelatorioButton)
-                            .addComponent(GraficoButton))))
+                            .addComponent(GraficoButton)
+                            .addComponent(DetalhesButton))))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 477, Short.MAX_VALUE))
         );
@@ -256,8 +267,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_EditarButtonActionPerformed
 
     private void DeletarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeletarButtonActionPerformed
-        System.out.println("Tamanho da lista quando aperto botão deletar");
-        //lista.sizeList();
+
         int linhaSelecionada = Table.getSelectedRow();
         System.out.println("EU SEI QUAL A LINHA SELECIONADA, É A LINHA: "+linhaSelecionada);
         if(linhaSelecionada != -1){
@@ -271,17 +281,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
             telaDeletar.setVisible(true);
 
         }
-        System.out.println("Tamanho da lista após o processamento do botão deletar");
-        //lista.sizeList();
-        /*
-        DefaultTableModel model = (DefaultTableModel) Table.getModel();
-        int linhaSelecionada = Table.getSelectedRow();
-        if(linhaSelecionada != -1){
-            Deletar telaDeletar = new Deletar(linhaSelecionada, this);
-            telaDeletar.setVisible(true);
-        }
-        model.removeRow(Table.getSelectedRow());
-        */
     }//GEN-LAST:event_DeletarButtonActionPerformed
 
     private void BuscarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarButtonActionPerformed
@@ -315,6 +314,25 @@ public class TelaPrincipal extends javax.swing.JFrame {
             LineChart example = new LineChart();
             example.setVisible(true);
     }//GEN-LAST:event_GraficoButtonActionPerformed
+
+    private void DetalhesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DetalhesButtonActionPerformed
+
+        int linhaSelecionada = Table.getSelectedRow();
+        System.out.println("EU SEI QUAL A LINHA SELECIONADA, É A LINHA: "+linhaSelecionada);
+        if(linhaSelecionada != -1){
+            Object id = Table.getValueAt(linhaSelecionada,0);
+            System.out.println("NA LINHA SELECIONADA EU VEJO QUE O ID DELA É DE:" + id.toString());
+            //System.out.println("A VARIÁVEL idNum é do tipo: "+" E EU FIZ UM CASTING PARA QUE O VALOR NO idNum seja: " + idNum);
+            int idNum = Integer.parseInt(id.toString());
+            System.out.println("A VARIÁVEL idNum EU FIZ UM CASTING PARA QUE O VALOR NO idNum seja: " + idNum);
+            try {
+                Detalhes detalhes= new Detalhes(idNum);
+                detalhes.setVisible(true);
+            } catch (SQLException ex) {
+                Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }    
+              }//GEN-LAST:event_DetalhesButtonActionPerformed
 
     public void removeRow(int row){
         //lista.sizeList();
@@ -444,6 +462,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton BuscarButton;
     private javax.swing.JButton CreateButton;
     private javax.swing.JButton DeletarButton;
+    private javax.swing.JButton DetalhesButton;
     private javax.swing.JButton EditarButton;
     private javax.swing.JButton GraficoButton;
     private javax.swing.JButton RelatorioButton;

@@ -43,7 +43,7 @@ public class Detalhes extends javax.swing.JFrame {
      * Creates new form Edicao
      */
     
-    public Detalhes(City cidade) {
+    public Detalhes(City cidade) throws SQLException {
         
         initComponents();
         this.setLocationRelativeTo(null);
@@ -87,26 +87,94 @@ public class Detalhes extends javax.swing.JFrame {
         jTextFieldRankingIDH.setText(IDH);
     }
     
-    private String rankingIDH(City cidade){
+        public Detalhes(int id) throws SQLException {
+        
+        initComponents();
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
+        this.setDefaultCloseOperation(Detalhes.DISPOSE_ON_CLOSE);
+        Read read = new Read();
+        City cidade = read.consultarPorId(id);
+        //inicializa a lista aqui já
+        //lista = new Lista();
+        
+        //atualiza a lista pra garantir que ela tá igual
+        //lista.atualizarLista();
+        
+        String Pib = rankingPIB(cidade);
+        String IDH = rankingIDH(cidade);
+        System.out.println("Ranking do PIB:"+Pib);
+        System.out.println("Ranking do IDH:"+IDH);
+        //ArrayList<City> cidades = lista.getCidades();
+        
+        
+       
+        System.out.println(cidade.toString());
+        
+        //Preenchendo os textfield
+        idField.setText(cidade.getId());
+        municipioField.setText(cidade.getMunicipio());
+        estadoField.setText(cidade.getEstado());
+        microRegiaoField.setText(cidade.getMicroregiao());
+        regiaoGeograficaField.setText(cidade.getRegiaoGeografica());
+        areaField.setText(String.valueOf(cidade.getArea()));
+        populacaoField.setText(String.valueOf(cidade.getPopulacao()));
+        domiciliosField.setText(String.valueOf(cidade.getDomicilios()));
+        pibTotalField.setText(String.valueOf(cidade.getPibTotal()));        
+        idhField.setText(String.valueOf(cidade.getIdh()));        
+        rendaMediaField.setText(String.valueOf(cidade.getRendaMedia()));        
+        rendaNominalField.setText(String.valueOf(cidade.getRendaNominal()));
+        peaField.setText(String.valueOf(cidade.getPea()));        
+        idhEduca.setText(String.valueOf(cidade.getIdhEducacao()));
+        idhLonge.setText(String.valueOf(cidade.getIdhLongevidade()));
+        jTextFieldRankingPib.setText(Pib);
+        jTextFieldRankingIDH.setText(IDH);
+    }
+    
+    private String rankingIDH(City cidade) throws SQLException{
         
         String posicao = "";
         System.out.println(cidade.toString());
         try {
             Read read = new Read();
-            ArrayList<City> cidades = read.buscarOrdenado(Ordenacoes.IDH_GERAL);
+            ArrayList<City> cidades = read.buscarTodos();
             if(!cidades.isEmpty()){
                 System.out.println("NÃO ESTOU VAZIA, TENHO "+cidades.size()+" ELEMENTOS");
             }
+            //ORDENANDO COM BOOBLE SORT!
+            int n = cidades.size();
+            boolean swapped;
+            for (int i = 0; i < n - 1; i++) {
+                swapped = false;
+
+                for (int j = 0; j < n - i - 1; j++) {
+                    // Compara os valores de pibPcTotal
+                    if (cidades.get(j).getIdh()> cidades.get(j + 1).getIdh()) {
+                        // Troca os elementos
+                        City temp = cidades.get(j);
+                        cidades.set(j, cidades.get(j + 1));
+                        cidades.set(j + 1, temp);
+                        swapped = true;
+                    }
+                }
+
+                // Se nenhuma troca ocorreu, a lista já está ordenada
+                if (!swapped) break;
+            }
+            
+            
+            //AGORA BUSCA A CIDADE NA LISTA ORDENADA
             for(int i = 0; i < cidades.size(); i++){
-                if(cidades.get(i).getId() == null ? cidade.getId() == null : cidades.get(i).getId().equals(cidade.getId())){
+                if(cidade.getId() == null ? cidades.get(i).getId() == null : cidade.getId().equals(cidades.get(i).getId())){
                     posicao = Integer.toString(i);
-                    return posicao;
+                    System.out.println("A POSIÇÃO NO RANKING DA CIDADE DE PROCURADA É DE: "+cidade.getId()+" SENDO O ID ACHADO DELA NA LISTA ORDENADA TBM SER "+ cidades.get(i).getId());
+                    System.out.println("E SUA POSIÇÃO É NA POSIÇÃO: "+ posicao);
                 }
             }
-           
-            return "";
             
-        } catch (SQLException ex) {
+            return posicao;
+            
+        }catch (SQLException ex) {
             Logger.getLogger(Detalhes.class.getName()).log(Level.SEVERE, null, ex);
         }
         return "";
@@ -118,20 +186,40 @@ public class Detalhes extends javax.swing.JFrame {
         System.out.println(cidade.toString());
         try {
             Read read = new Read();
-            ArrayList<City> cidades = read.buscarOrdenado(Ordenacoes.PIB_TOTAL);
+            ArrayList<City> cidades = read.buscarTodos();
             if(!cidades.isEmpty()){
                 System.out.println("NÃO ESTOU VAZIA, TENHO "+cidades.size()+" ELEMENTOS");
             }
-            for(int i = 0; i < cidades.size(); i++){
-                if(cidades.get(i).getId() == null ? cidade.getId() == null : cidades.get(i).getId().equals(cidade.getId())){
-                    posicao = Integer.toString(i);
-                    return posicao;
+            
+            //SORT COM SELECTION SORT
+            int n = cidades.size();
+            for (int i = 0; i < n - 1; i++) {
+                // Encontra o índice do menor elemento no restante do array
+                int minIndex = i;
+                for (int j = i + 1; j < n; j++) {
+                    if (cidades.get(j).getPibPcTotal() < cidades.get(minIndex).getPibPcTotal()) {
+                        minIndex = j;
+                    }
+                }
+                // Troca o menor elemento encontrado com o elemento na posição atual
+                if (minIndex != i) {
+                    City temp = cidades.get(i);
+                    cidades.set(i, cidades.get(minIndex));
+                    cidades.set(minIndex, temp);
                 }
             }
-           
-            return "";
             
-        } catch (SQLException ex) {
+            //AGORA BUSCA A CIDADE NA LISTA ORDENADA
+            for(int i = 0; i < cidades.size(); i++){
+                if(cidade.getId() == null ? cidades.get(i).getId() == null : cidade.getId().equals(cidades.get(i).getId())){
+                    posicao = Integer.toString(i);
+                    System.out.println("A POSIÇÃO NO RANKING DA CIDADE DE PROCURADA É DE: "+cidade.getId()+" SENDO O ID ACHADO DELA NA LISTA ORDENADA TBM SER "+ cidades.get(i).getId());
+                    System.out.println("E SUA POSIÇÃO É NA POSIÇÃO: "+ posicao);
+                }
+            }            
+            return posicao;
+           
+        }catch (SQLException ex) {
             Logger.getLogger(Detalhes.class.getName()).log(Level.SEVERE, null, ex);
         }
         return "";
