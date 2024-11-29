@@ -25,6 +25,8 @@ import Services.Read;
 import Services.Update;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -38,7 +40,8 @@ public class Buscar extends javax.swing.JFrame {
     /**
      * Creates new form Edicao
      */
-    int indexDaCidadeBuscada;    
+    int indexDaCidadeBuscada;
+    City cidadeDetalhes;
     public Buscar(int id) throws SQLException {
         
         initComponents();
@@ -59,6 +62,48 @@ public class Buscar extends javax.swing.JFrame {
         //ArrayList<City> cidades = lista.getCidades();
         
         City cidadeBuscar = read.consultarPorId(id);
+        this.cidadeDetalhes = read.consultarPorId(id);
+        System.out.println(cidadeBuscar.toString());
+        
+        //Preenchendo os textfield
+        idField.setText(cidadeBuscar.getId());
+        municipioField.setText(cidadeBuscar.getMunicipio());
+        estadoField.setText(cidadeBuscar.getEstado());
+        microRegiaoField.setText(cidadeBuscar.getMicroregiao());
+        regiaoGeograficaField.setText(cidadeBuscar.getRegiaoGeografica());
+        areaField.setText(String.valueOf(cidadeBuscar.getArea()));
+        populacaoField.setText(String.valueOf(cidadeBuscar.getPopulacao()));
+        domiciliosField.setText(String.valueOf(cidadeBuscar.getDomicilios()));
+        pibTotalField.setText(String.valueOf(cidadeBuscar.getPibTotal()));        
+        idhField.setText(String.valueOf(cidadeBuscar.getIdh()));        
+        rendaMediaField.setText(String.valueOf(cidadeBuscar.getRendaMedia()));        
+        rendaNominalField.setText(String.valueOf(cidadeBuscar.getRendaNominal()));
+        peaField.setText(String.valueOf(cidadeBuscar.getPea()));        
+        idhEduca.setText(String.valueOf(cidadeBuscar.getIdhEducacao()));
+        idhLonge.setText(String.valueOf(cidadeBuscar.getIdhLongevidade()));
+        
+        
+    }
+    public Buscar(String municipio) throws SQLException {
+        
+        initComponents();
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
+        this.setDefaultCloseOperation(Buscar.DISPOSE_ON_CLOSE);
+        
+        Read read = new Read();
+        //this.indexDaCidadeBuscada = index;
+        
+        //inicializa a lista aqui já
+        //lista = new Lista();
+        
+        //atualiza a lista pra garantir que ela tá igual
+        //lista.atualizarLista();
+        
+        
+        //ArrayList<City> cidades = lista.getCidades();
+        
+        City cidadeBuscar = read.consultarPorNome(municipio);
         
         System.out.println(cidadeBuscar.toString());
         
@@ -79,8 +124,7 @@ public class Buscar extends javax.swing.JFrame {
         idhEduca.setText(String.valueOf(cidadeBuscar.getIdhEducacao()));
         idhLonge.setText(String.valueOf(cidadeBuscar.getIdhLongevidade()));
         
-    }
-        
+    }        
         
     /**
      * This method is called from within the constructor to initialize the form.

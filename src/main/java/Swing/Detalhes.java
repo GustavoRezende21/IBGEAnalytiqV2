@@ -40,6 +40,8 @@ public class Detalhes extends javax.swing.JFrame {
     /**
      * Creates new form Edicao
      */
+    TelaPrincipal telaPrincipal;
+    City cidade;
     
     public Detalhes(City cidade) throws SQLException {
         
@@ -47,7 +49,7 @@ public class Detalhes extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setDefaultCloseOperation(Detalhes.DISPOSE_ON_CLOSE);
-        
+        this.cidade = cidade;
         
         //inicializa a lista aqui já
         //lista = new Lista();
@@ -85,14 +87,102 @@ public class Detalhes extends javax.swing.JFrame {
         jTextFieldRankingIDH.setText(IDH);
     }
     
-        public Detalhes(int id) throws SQLException {
+    public Detalhes(int id) throws SQLException {
         
         initComponents();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setDefaultCloseOperation(Detalhes.DISPOSE_ON_CLOSE);
         Read read = new Read();
-        City cidade = read.consultarPorId(id);
+        this.cidade = read.consultarPorId(id);
+        //inicializa a lista aqui já
+        //lista = new Lista();
+        
+        //atualiza a lista pra garantir que ela tá igual
+        //lista.atualizarLista();
+        
+        String Pib = rankingPIB(cidade);
+        String IDH = rankingIDH(cidade);
+        System.out.println("Ranking do PIB:"+Pib);
+        System.out.println("Ranking do IDH:"+IDH);
+        //ArrayList<City> cidades = lista.getCidades();
+        
+        
+       
+        System.out.println(cidade.toString());
+        
+        //Preenchendo os textfield
+        idField.setText(cidade.getId());
+        municipioField.setText(cidade.getMunicipio());
+        estadoField.setText(cidade.getEstado());
+        microRegiaoField.setText(cidade.getMicroregiao());
+        regiaoGeograficaField.setText(cidade.getRegiaoGeografica());
+        areaField.setText(String.valueOf(cidade.getArea()));
+        populacaoField.setText(String.valueOf(cidade.getPopulacao()));
+        domiciliosField.setText(String.valueOf(cidade.getDomicilios()));
+        pibTotalField.setText(String.valueOf(cidade.getPibTotal()));        
+        idhField.setText(String.valueOf(cidade.getIdh()));        
+        rendaMediaField.setText(String.valueOf(cidade.getRendaMedia()));        
+        rendaNominalField.setText(String.valueOf(cidade.getRendaNominal()));
+        peaField.setText(String.valueOf(cidade.getPea()));        
+        idhEduca.setText(String.valueOf(cidade.getIdhEducacao()));
+        idhLonge.setText(String.valueOf(cidade.getIdhLongevidade()));
+        jTextFieldRankingPib.setText(Pib);
+        jTextFieldRankingIDH.setText(IDH);
+    }
+        
+    public Detalhes(String municipio) throws SQLException {
+        
+        initComponents();
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
+        this.setDefaultCloseOperation(Detalhes.DISPOSE_ON_CLOSE);
+        Read read = new Read();
+        this.cidade = read.consultarPorNome(municipio);
+        //inicializa a lista aqui já
+        //lista = new Lista();
+        
+        //atualiza a lista pra garantir que ela tá igual
+        //lista.atualizarLista();
+        
+        String Pib = rankingPIB(cidade);
+        String IDH = rankingIDH(cidade);
+        System.out.println("Ranking do PIB:"+Pib);
+        System.out.println("Ranking do IDH:"+IDH);
+        //ArrayList<City> cidades = lista.getCidades();
+        
+        
+       
+        System.out.println(cidade.toString());
+        
+        //Preenchendo os textfield
+        idField.setText(cidade.getId());
+        municipioField.setText(cidade.getMunicipio());
+        estadoField.setText(cidade.getEstado());
+        microRegiaoField.setText(cidade.getMicroregiao());
+        regiaoGeograficaField.setText(cidade.getRegiaoGeografica());
+        areaField.setText(String.valueOf(cidade.getArea()));
+        populacaoField.setText(String.valueOf(cidade.getPopulacao()));
+        domiciliosField.setText(String.valueOf(cidade.getDomicilios()));
+        pibTotalField.setText(String.valueOf(cidade.getPibTotal()));        
+        idhField.setText(String.valueOf(cidade.getIdh()));        
+        rendaMediaField.setText(String.valueOf(cidade.getRendaMedia()));        
+        rendaNominalField.setText(String.valueOf(cidade.getRendaNominal()));
+        peaField.setText(String.valueOf(cidade.getPea()));        
+        idhEduca.setText(String.valueOf(cidade.getIdhEducacao()));
+        idhLonge.setText(String.valueOf(cidade.getIdhLongevidade()));
+        jTextFieldRankingPib.setText(Pib);
+        jTextFieldRankingIDH.setText(IDH);
+    }        
+      
+    public Detalhes(City cidade, TelaPrincipal telaPrincipal) throws SQLException {
+        
+        initComponents();
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
+        this.setDefaultCloseOperation(Detalhes.DISPOSE_ON_CLOSE);
+        this.telaPrincipal = telaPrincipal;
+        this.cidade = cidade;
         //inicializa a lista aqui já
         //lista = new Lista();
         
@@ -129,6 +219,94 @@ public class Detalhes extends javax.swing.JFrame {
         jTextFieldRankingIDH.setText(IDH);
     }
     
+    public Detalhes(int id, TelaPrincipal telaPrincipal) throws SQLException {
+        
+        initComponents();
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
+        this.setDefaultCloseOperation(Detalhes.DISPOSE_ON_CLOSE);
+        Read read = new Read();
+        this.cidade = read.consultarPorId(id);
+        this.telaPrincipal = telaPrincipal;
+        //inicializa a lista aqui já
+        //lista = new Lista();
+        
+        //atualiza a lista pra garantir que ela tá igual
+        //lista.atualizarLista();
+        
+        String Pib = rankingPIB(cidade);
+        String IDH = rankingIDH(cidade);
+        System.out.println("Ranking do PIB:"+Pib);
+        System.out.println("Ranking do IDH:"+IDH);
+        //ArrayList<City> cidades = lista.getCidades();
+        
+        
+       
+        System.out.println(cidade.toString());
+        
+        //Preenchendo os textfield
+        idField.setText(cidade.getId());
+        municipioField.setText(cidade.getMunicipio());
+        estadoField.setText(cidade.getEstado());
+        microRegiaoField.setText(cidade.getMicroregiao());
+        regiaoGeograficaField.setText(cidade.getRegiaoGeografica());
+        areaField.setText(String.valueOf(cidade.getArea()));
+        populacaoField.setText(String.valueOf(cidade.getPopulacao()));
+        domiciliosField.setText(String.valueOf(cidade.getDomicilios()));
+        pibTotalField.setText(String.valueOf(cidade.getPibTotal()));        
+        idhField.setText(String.valueOf(cidade.getIdh()));        
+        rendaMediaField.setText(String.valueOf(cidade.getRendaMedia()));        
+        rendaNominalField.setText(String.valueOf(cidade.getRendaNominal()));
+        peaField.setText(String.valueOf(cidade.getPea()));        
+        idhEduca.setText(String.valueOf(cidade.getIdhEducacao()));
+        idhLonge.setText(String.valueOf(cidade.getIdhLongevidade()));
+        jTextFieldRankingPib.setText(Pib);
+        jTextFieldRankingIDH.setText(IDH);
+    }
+
+    public Detalhes(String municipio, TelaPrincipal telaPrincipal) throws SQLException {
+        
+        initComponents();
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
+        this.setDefaultCloseOperation(Detalhes.DISPOSE_ON_CLOSE);
+        Read read = new Read();
+        this.cidade = read.consultarPorNome(municipio);
+        this.telaPrincipal = telaPrincipal;
+        //inicializa a lista aqui já
+        //lista = new Lista();
+        
+        //atualiza a lista pra garantir que ela tá igual
+        //lista.atualizarLista();
+        
+        String Pib = rankingPIB(cidade);
+        String IDH = rankingIDH(cidade);
+        System.out.println("Ranking do PIB:"+Pib);
+        System.out.println("Ranking do IDH:"+IDH);
+        //ArrayList<City> cidades = lista.getCidades();
+        
+        System.out.println(cidade.toString());
+        
+        //Preenchendo os textfield
+        idField.setText(cidade.getId());
+        municipioField.setText(cidade.getMunicipio());
+        estadoField.setText(cidade.getEstado());
+        microRegiaoField.setText(cidade.getMicroregiao());
+        regiaoGeograficaField.setText(cidade.getRegiaoGeografica());
+        areaField.setText(String.valueOf(cidade.getArea()));
+        populacaoField.setText(String.valueOf(cidade.getPopulacao()));
+        domiciliosField.setText(String.valueOf(cidade.getDomicilios()));
+        pibTotalField.setText(String.valueOf(cidade.getPibTotal()));        
+        idhField.setText(String.valueOf(cidade.getIdh()));        
+        rendaMediaField.setText(String.valueOf(cidade.getRendaMedia()));        
+        rendaNominalField.setText(String.valueOf(cidade.getRendaNominal()));
+        peaField.setText(String.valueOf(cidade.getPea()));        
+        idhEduca.setText(String.valueOf(cidade.getIdhEducacao()));
+        idhLonge.setText(String.valueOf(cidade.getIdhLongevidade()));
+        jTextFieldRankingPib.setText(Pib);
+        jTextFieldRankingIDH.setText(IDH);
+    }        
+        
     private String rankingIDH(City cidade) throws SQLException{
         
         String posicao = "";
@@ -269,6 +447,8 @@ public class Detalhes extends javax.swing.JFrame {
         jLabel18 = new javax.swing.JLabel();
         jTextFieldRankingPib = new javax.swing.JTextField();
         jTextFieldRankingIDH = new javax.swing.JTextField();
+        DeletarButton = new javax.swing.JButton();
+        EditarButton = new javax.swing.JButton();
 
         jLabel16.setText("jLabel16");
 
@@ -347,13 +527,27 @@ public class Detalhes extends javax.swing.JFrame {
 
         jLabel15.setText("IDH Longevidade");
 
-        jLabel17.setText("RANKING NO PIB");
+        jLabel17.setText("Ranking no PIB Per Capta");
 
-        jLabel18.setText("RANKING NO IDH GERAL");
+        jLabel18.setText("Ranking no IDH Geral");
 
         jTextFieldRankingPib.setEditable(false);
 
         jTextFieldRankingIDH.setEditable(false);
+
+        DeletarButton.setText("Deletar");
+        DeletarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeletarButtonActionPerformed(evt);
+            }
+        });
+
+        EditarButton.setText("Editar");
+        EditarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditarButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -362,26 +556,26 @@ public class Detalhes extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(44, 44, 44)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel1)
-                        .addComponent(jLabel2)
-                        .addComponent(jLabel3)
-                        .addComponent(jLabel4)
-                        .addComponent(jLabel5)
-                        .addComponent(regiaoGeograficaField)
-                        .addComponent(estadoField)
-                        .addComponent(microRegiaoField)
-                        .addComponent(municipioField)
-                        .addComponent(idField, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel17)
-                    .addComponent(jTextFieldRankingPib, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel18)
-                    .addComponent(jTextFieldRankingIDH, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(FecharButton)
-                        .addGroup(layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(DeletarButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(EditarButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5)
+                            .addComponent(regiaoGeograficaField)
+                            .addComponent(estadoField)
+                            .addComponent(microRegiaoField)
+                            .addComponent(municipioField)
+                            .addComponent(idField)
+                            .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jTextFieldRankingPib))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jLabel6)
                                 .addComponent(jLabel7)
@@ -393,18 +587,22 @@ public class Detalhes extends javax.swing.JFrame {
                                 .addComponent(jLabel10)
                                 .addComponent(idhField)
                                 .addComponent(pibTotalField, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(18, 18, 18)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel15)
-                                .addComponent(idhEduca, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel14)
-                                .addComponent(peaField, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel13)
-                                .addComponent(rendaNominalField, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel12)
-                                .addComponent(rendaMediaField, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel11)
-                                .addComponent(idhLonge, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jTextFieldRankingIDH, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel15)
+                            .addComponent(idhEduca, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel14)
+                            .addComponent(peaField, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel13)
+                            .addComponent(rendaNominalField, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel12)
+                            .addComponent(rendaMediaField, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11)
+                            .addComponent(idhLonge, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(FecharButton))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -481,12 +679,16 @@ public class Detalhes extends javax.swing.JFrame {
                     .addComponent(jLabel17)
                     .addComponent(jLabel18))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextFieldRankingIDH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTextFieldRankingPib, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(FecharButton)))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldRankingPib, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldRankingIDH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(FecharButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(DeletarButton)
+                    .addComponent(EditarButton))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
 
         pack();
@@ -547,12 +749,36 @@ public class Detalhes extends javax.swing.JFrame {
         //update.UpdateById(i, lista, cidadeEditar);
     }//GEN-LAST:event_FecharButtonActionPerformed
 
+    private void DeletarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeletarButtonActionPerformed
+        
+        int idCidade = Integer.parseInt(this.cidade.getId());
+        
+        Deletar telaDeletar = new Deletar(idCidade, this.telaPrincipal);
+        telaDeletar.setVisible(true);
+        dispose();
+
+    }//GEN-LAST:event_DeletarButtonActionPerformed
+
+    private void EditarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditarButtonActionPerformed
+        int idCidade = Integer.parseInt(this.cidade.getId());
+        try {
+            Editar telaEditar = new Editar(idCidade, this.telaPrincipal);
+            telaEditar.setVisible(true);
+            dispose();
+        } catch (SQLException ex) {
+            Logger.getLogger(Detalhes.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        dispose();
+    }//GEN-LAST:event_EditarButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton DeletarButton;
+    private javax.swing.JButton EditarButton;
     private javax.swing.JButton FecharButton;
     private javax.swing.JTextField areaField;
     private javax.swing.JTextField domiciliosField;

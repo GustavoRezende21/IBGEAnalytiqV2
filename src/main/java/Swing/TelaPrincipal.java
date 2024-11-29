@@ -157,7 +157,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Buscar pelo Código IBGE");
+        jLabel1.setText("Buscar por Código IBGE ou Nome do Município");
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/IBGE_AnalytiQ_Logo2.png"))); // NOI18N
 
@@ -193,18 +193,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addGap(6, 6, 6)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(TextFieldBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(TextFieldBuscar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BuscarButton)
-                        .addGap(121, 121, 121)
-                        .addComponent(ComboBox, 0, 262, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(DetalhesButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(GraficoButton))
+                        .addComponent(BuscarButton))
                     .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                .addComponent(ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(DetalhesButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(GraficoButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(RelatorioButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -296,23 +296,40 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void BuscarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarButtonActionPerformed
         
-        String IdBusca = TextFieldBuscar.getText();
-        Buscar telaBuscar = null;
-        try {
-            telaBuscar = new Buscar(Integer.parseInt(IdBusca));
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        String input = TextFieldBuscar.getText().trim();
+         
+        //Verifica se tá vazio
+        if(input.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Por favor, insira um Código IBGE ou nome do município para  para pesquisar.");
+            return;
         }
-        telaBuscar.setVisible(true);
-        System.out.println("Tamanho da lista após o processamento do botão buscar");
-        //lista.sizeList();
+        
+        //Declara a tela de busca aqui encima mesmo
+        //Buscar telaBuscar = null; SIMPLESMENTE O DETALHES É MELHOR
+        Detalhes detalhes = null;
+        if(input.matches("\\d+")){ //regex que confere se é um numero
+            //é um id
+            try {
+                detalhes = new Detalhes(Integer.parseInt(input),this);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }else{
+            //é um nome
+            try {
+                detalhes = new Detalhes(input,this);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        detalhes.setVisible(true);
     }//GEN-LAST:event_BuscarButtonActionPerformed
 
     private void RelatorioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RelatorioButtonActionPerformed
 
         Relatorio relatorio = null;
         try {
-            relatorio = new Relatorio();
+            relatorio = new Relatorio(this);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -337,7 +354,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             int idNum = Integer.parseInt(id.toString());
             System.out.println("A VARIÁVEL idNum EU FIZ UM CASTING PARA QUE O VALOR NO idNum seja: " + idNum);
             try {
-                Detalhes detalhes= new Detalhes(idNum);
+                Detalhes detalhes= new Detalhes(idNum, this);
                 detalhes.setVisible(true);
             } catch (SQLException ex) {
                 Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
@@ -637,6 +654,37 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
     }
 
+    public void MostrarApenasUm(City cidade) throws SQLException {
+        DefaultTableModel model = (DefaultTableModel) Table.getModel();
+
+    // Limpar a tabela antes de adicionar novas linhas
+        model.setRowCount(0); // Limpa as linhas da tabela
+
+        Object rowData[] = new Object[21];
+        rowData[0] = cidade.getId();
+        rowData[1] = cidade.getMunicipio();
+        rowData[2] = cidade.getMicroregiao();
+        rowData[3] = cidade.getEstado();
+        rowData[4] = cidade.getRegiaoGeografica();
+        rowData[5] = cidade.getArea();
+        rowData[6] = cidade.getPopulacao();
+        rowData[7] = cidade.getDomicilios();
+        rowData[8] = cidade.getPibTotal();
+        rowData[9] = cidade.getIdh();
+        rowData[10] = cidade.getRendaMedia();
+        rowData[11] = cidade.getRendaNominal();
+        rowData[12] = cidade.getPea();
+        rowData[13] = cidade.getIdhEducacao();
+        rowData[14] = cidade.getIdhLongevidade();
+        rowData[15] = cidade.getDensidadeDemografica();
+        rowData[16] = cidade.getClassficacaoIDH();
+        rowData[17] = cidade.getPibPcTotal();
+        rowData[18] = cidade.getUltimaAtualizacao();
+        rowData[19] = cidade.getClassificacaoIDHEdu();
+        rowData[20] = cidade.getClassificacaoIDHLongevidade(); 
+        model.addRow(rowData);
+
+    }
     
     /**
      * @param args the command line arguments

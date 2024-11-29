@@ -44,10 +44,11 @@ public class Relatorio extends javax.swing.JFrame {
     City piorIdhEdu;
     City maiorPibTotal;
     City menorPibTotal;
-    public Relatorio() throws SQLException {
+    TelaPrincipal telaPrincipal;
+    public Relatorio(TelaPrincipal telaPrincipal) throws SQLException {
         
         initComponents();
-        
+        this.telaPrincipal = telaPrincipal;
         //Inicializando as cidades
         City melhorPib = MelhorPib();
         City piorPib = PiorPib();
