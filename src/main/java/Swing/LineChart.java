@@ -114,6 +114,10 @@ public class LineChart extends JFrame {
 
         plot.setDomainGridlinesVisible(true);
         plot.setDomainGridlinePaint(Color.BLACK);
+        
+        // Habilitar pan no gráfico
+        plot.setDomainPannable(true); // Permite pan no eixo X
+        plot.setRangePannable(true);  // Permite pan no eixo Y
 
         // Adicionar as anotações (nomes das cidades) após o gráfico ser criado
         addAnnotationsToPlot(plot, dataset);
