@@ -96,6 +96,49 @@ public class City {
         this.classificacaoIDHLongevidade = avaliacaoIdh(idhLongevidade);
         
     }
+    
+    public City(String id,
+                String municipio,
+                String microregiao,
+                String estado,
+                String regiaoGeografica,
+                double area,
+                double populacao,
+                double domicilios,
+                double pibTotal,
+                double idh,
+                double rendaMedia,
+                double rendaNominal,
+                double pea,
+                double idhEducacao,
+                double idhLongevidade,
+                String ultimaalteracao
+                ){
+        this.id = id;
+        this.municipio = municipio;
+        this.microregiao = microregiao;
+        this.regiaoGeografica = regiaoGeografica;
+        this.estado = estado;
+        this.area = area;
+        this.populacao = populacao;
+        this.domicilios = domicilios;
+        this.pibTotal = pibTotal;
+        this.idh = idh;
+        this.rendaMedia = rendaMedia;
+        this.rendaNominal = rendaNominal;
+        this.pea = pea;
+        this.idhEducacao = idhEducacao;
+        this.idhLongevidade = idhLongevidade;
+        //this.ultimaAtualizacao = "-";
+        //contas para setar as 3 variáveis dependentes
+        this.densidadeDemografica = (pibTotal/populacao);
+        this.pibPcTotal = (pibTotal/populacao);
+        this.classficacaoIDH = avaliacaoIdh(idh);
+        this.classificacaoIDHEdu = avaliacaoIdh(idhEducacao);
+        this.classificacaoIDHLongevidade = avaliacaoIdh(idhLongevidade);
+        this.ultimaAtualizacao = ultimaalteracao;
+    }
+    
 
     //CONSTRUTOR COM TUDO PARA SE USAR MAIS PRA LER O ARQUIVO DE SAIDA
     public City(
@@ -120,6 +163,7 @@ public class City {
             String ultimaAtualizacao,
             String classificacaoIdhEdu,
             String classificacaoIdhLongevidade
+            //String ultimaalteracao
             ){
         this.id = id;
         this.municipio = municipio;
@@ -142,6 +186,7 @@ public class City {
         this.classficacaoIDH = classficacaoIDH;
         this.classificacaoIDHEdu = classificacaoIdhEdu;
         this.classificacaoIDHLongevidade = classificacaoIdhLongevidade;
+        //this.ultimaAtualizacao = ultimaalteracao;
     }
 
     public City(){}

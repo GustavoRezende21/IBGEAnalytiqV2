@@ -499,48 +499,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         
         JOptionPane.showMessageDialog(this, "Foi ordenada por: " + opcaoOrdenacao);
     }//GEN-LAST:event_ComboBoxActionPerformed
-
-    public void removeRow(int row){
-        //lista.sizeList();
-        DefaultTableModel model = (DefaultTableModel) Table.getModel();
-        int linhaSelecionada = row;
-        if(linhaSelecionada != -1){
-            model.removeRow(Table.getSelectedRow());
-            
-            //Deletar telaDeletar = new Deletar(linhaSelecionada, this);
-            //telaDeletar.setVisible(true);
-        }
-        
-    }
-    
-    public void adicionarRow(City cidade){
-        DefaultTableModel model = (DefaultTableModel) Table.getModel();
-        Object rowData[] = new Object[21];
-
-            rowData[0] = cidade.getId();
-            rowData[1] = cidade.getMunicipio();
-            rowData[2] = cidade.getMicroregiao();
-            rowData[3] = cidade.getEstado();
-            rowData[4] = cidade.getRegiaoGeografica();
-            rowData[5] = cidade.getArea();
-            rowData[6] = cidade.getPopulacao();
-            rowData[7] = cidade.getDomicilios();
-            rowData[8] = cidade.getPibTotal();
-            rowData[9] = cidade.getIdh();
-            rowData[10] = cidade.getRendaMedia();
-            rowData[11] = cidade.getRendaNominal();
-            rowData[12] = cidade.getPea();
-            rowData[13] = cidade.getIdhEducacao();
-            rowData[14] = cidade.getIdhLongevidade();
-            rowData[15] = cidade.getDensidadeDemografica();
-            rowData[16] = cidade.getClassficacaoIDH();
-            rowData[17] = cidade.getPibPcTotal();
-            rowData[18] = cidade.getUltimaAtualizacao();
-            rowData[19] = cidade.getClassificacaoIDHEdu();
-            rowData[20] = cidade.getClassificacaoIDHLongevidade();
-            model.addRow(rowData);
-
-    }
     
     public void preencherTabela() throws SQLException {
         
@@ -652,40 +610,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             rowData[20] = cidades.get(i).getClassificacaoIDHLongevidade();
             model.addRow(rowData);
         }
-    }
-
-    public void MostrarApenasUm(City cidade) throws SQLException {
-        DefaultTableModel model = (DefaultTableModel) Table.getModel();
-
-    // Limpar a tabela antes de adicionar novas linhas
-        model.setRowCount(0); // Limpa as linhas da tabela
-
-        Object rowData[] = new Object[21];
-        rowData[0] = cidade.getId();
-        rowData[1] = cidade.getMunicipio();
-        rowData[2] = cidade.getMicroregiao();
-        rowData[3] = cidade.getEstado();
-        rowData[4] = cidade.getRegiaoGeografica();
-        rowData[5] = cidade.getArea();
-        rowData[6] = cidade.getPopulacao();
-        rowData[7] = cidade.getDomicilios();
-        rowData[8] = cidade.getPibTotal();
-        rowData[9] = cidade.getIdh();
-        rowData[10] = cidade.getRendaMedia();
-        rowData[11] = cidade.getRendaNominal();
-        rowData[12] = cidade.getPea();
-        rowData[13] = cidade.getIdhEducacao();
-        rowData[14] = cidade.getIdhLongevidade();
-        rowData[15] = cidade.getDensidadeDemografica();
-        rowData[16] = cidade.getClassficacaoIDH();
-        rowData[17] = cidade.getPibPcTotal();
-        rowData[18] = cidade.getUltimaAtualizacao();
-        rowData[19] = cidade.getClassificacaoIDHEdu();
-        rowData[20] = cidade.getClassificacaoIDHLongevidade(); 
-        model.addRow(rowData);
-
-    }
-    
+    }    
     /**
      * @param args the command line arguments
      */

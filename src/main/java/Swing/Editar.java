@@ -28,9 +28,12 @@ import Swing.Filters.LetterFilter;
 import Swing.Filters.NumberFilter;
 import Swing.Filters.NumberOnlyFilter;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.text.AbstractDocument;
@@ -353,10 +356,10 @@ public class Editar extends javax.swing.JFrame {
         //double pibTotal = Double.parseDouble(Field.getText());
         //String classificacaoIDH;
         //String pibPcTotal;
-        LocalDateTime agora = LocalDateTime.now();
-        DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-        String dataHoraFormatada = agora.format(formatador);
-        
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Date date = new Date();
+        String dataHoraFormatada = dateFormat.format(date);
+        System.out.println("A hora para salvar é: " +dataHoraFormatada);
         
         
         City cidade = new City(
@@ -374,9 +377,11 @@ public class Editar extends javax.swing.JFrame {
                 rendaNominal,
                 pea,
                 idhEducacao,
-                idhLongevidade
+                idhLongevidade,
+                dataHoraFormatada
         );
-        cidade.setUltimaAtualizacao(dataHoraFormatada);
+        //cidade.setUltimaAtualizacao(dataHoraFormatada);
+        System.out.println("VOU EDITAR UMA CIDADE E ELA ESTÁ ASSIM: ");
         System.out.println(cidade.toCSVOut());
         
         try {
@@ -389,7 +394,6 @@ public class Editar extends javax.swing.JFrame {
         
         //update.UpdateById(i, lista, cidadeEditar);
     }//GEN-LAST:event_jButton1ActionPerformed
-
     /**
      * @param args the command line arguments
      */

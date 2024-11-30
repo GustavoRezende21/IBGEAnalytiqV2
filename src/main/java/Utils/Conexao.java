@@ -27,10 +27,10 @@ import java.sql.SQLException;
 public class Conexao {
 
     // strings de conexão
-    String databaseURL = "jdbc:postgresql://localhost:5432/postgres";
-    String usuario = "postgres";
-    String senha = "admin";
-    String driverName = "org.postgresql.Driver";
+    private String databaseURL = "jdbc:postgresql://localhost:5432/postgres";
+    private String usuario = "postgres";
+    private String senha = "admin";
+    private String driverName = "org.postgresql.Driver";
     private Connection connection;
 
     public Connection conectar() {

@@ -43,7 +43,7 @@ public class DAO_Atualizar implements DataAcessObject {
         String sql = "UPDATE cidade SET cidade = ?, microregiao = ?,"
                 + " estado = ?, regiaogeografica = ?, areakm = ?, populacao = ?,"
                 + " domicilios = ?, pib_total = ?, idh_geral = ?, renda_media = ?,"
-                + " renda_nominal = ?, pea_dia = ?, idh_educacao = ?, idh_longevidade = ?"
+                + " renda_nominal = ?, pea_dia = ?, idh_educacao = ?, idh_longevidade = ?, ultimaalteracao = ?"
                 + " WHERE id ="+cidade.getId()+";";
         /*
         ResultSet resultado = statement.executeQuery("UPDATE cidades SET id = ?, cidade = ?, microregiao = ?,"
@@ -94,7 +94,7 @@ public class DAO_Atualizar implements DataAcessObject {
             pstmt.setDouble(12, cidade.getPea());
             pstmt.setDouble(13, cidade.getIdhEducacao());
             pstmt.setDouble(14, cidade.getIdhLongevidade());
-            
+            pstmt.setString(15, cidade.getUltimaAtualizacao());
             /*
             System.out.println("EXECUTED QUERY IS");
             System.out.println(sql);

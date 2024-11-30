@@ -85,6 +85,7 @@ public class Detalhes extends javax.swing.JFrame {
         idhLonge.setText(String.valueOf(cidade.getIdhLongevidade()));
         jTextFieldRankingPib.setText(Pib);
         jTextFieldRankingIDH.setText(IDH);
+        UltimaAlteracaoTextField.setText(cidade.getUltimaAtualizacao());
     }
     
     public Detalhes(int id) throws SQLException {
@@ -449,6 +450,8 @@ public class Detalhes extends javax.swing.JFrame {
         jTextFieldRankingIDH = new javax.swing.JTextField();
         DeletarButton = new javax.swing.JButton();
         EditarButton = new javax.swing.JButton();
+        UltimaAlteracaoTextField = new javax.swing.JTextField();
+        jLabel19 = new javax.swing.JLabel();
 
         jLabel16.setText("jLabel16");
 
@@ -549,6 +552,10 @@ public class Detalhes extends javax.swing.JFrame {
             }
         });
 
+        UltimaAlteracaoTextField.setEditable(false);
+
+        jLabel19.setText("Última Alteração");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -556,10 +563,6 @@ public class Detalhes extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(44, 44, 44)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(DeletarButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(EditarButton))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel1)
@@ -589,20 +592,27 @@ public class Detalhes extends javax.swing.JFrame {
                                 .addComponent(pibTotalField, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jTextFieldRankingIDH, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel15)
-                            .addComponent(idhEduca, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel14)
-                            .addComponent(peaField, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel13)
-                            .addComponent(rendaNominalField, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel12)
-                            .addComponent(rendaMediaField, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel11)
-                            .addComponent(idhLonge, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(FecharButton))))
+                                .addComponent(jTextFieldRankingIDH, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(DeletarButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(EditarButton)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(FecharButton)
+                        .addComponent(jLabel15)
+                        .addComponent(idhEduca, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
+                        .addComponent(jLabel14)
+                        .addComponent(peaField, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
+                        .addComponent(jLabel13)
+                        .addComponent(rendaNominalField, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
+                        .addComponent(jLabel12)
+                        .addComponent(rendaMediaField, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
+                        .addComponent(jLabel11)
+                        .addComponent(idhLonge, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
+                        .addComponent(UltimaAlteracaoTextField))
+                    .addComponent(jLabel19))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -677,18 +687,20 @@ public class Detalhes extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel17)
-                    .addComponent(jLabel18))
+                    .addComponent(jLabel18)
+                    .addComponent(jLabel19))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextFieldRankingIDH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextFieldRankingPib, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(FecharButton)))
+                        .addComponent(jTextFieldRankingIDH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(UltimaAlteracaoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldRankingPib, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(DeletarButton)
-                    .addComponent(EditarButton))
-                .addContainerGap(46, Short.MAX_VALUE))
+                    .addComponent(EditarButton)
+                    .addComponent(FecharButton))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         pack();
@@ -780,6 +792,7 @@ public class Detalhes extends javax.swing.JFrame {
     private javax.swing.JButton DeletarButton;
     private javax.swing.JButton EditarButton;
     private javax.swing.JButton FecharButton;
+    private javax.swing.JTextField UltimaAlteracaoTextField;
     private javax.swing.JTextField areaField;
     private javax.swing.JTextField domiciliosField;
     private javax.swing.JTextField estadoField;
@@ -797,6 +810,7 @@ public class Detalhes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

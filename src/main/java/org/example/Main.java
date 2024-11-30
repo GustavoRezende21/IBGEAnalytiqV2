@@ -36,8 +36,8 @@ import Utils.Conexao;
 public class Main {
     public static void main(String[] args){
         
-        Conexao conexao = new Conexao();
-        conexao.conectar();
+        //Conexao conexao = new Conexao();
+        //conexao.conectar();
         
         //Lista lista = new Lista();
         java.awt.EventQueue.invokeLater(new Runnable() {

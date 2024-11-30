@@ -42,8 +42,9 @@ public  class DAO_Ordenacao implements DataAcessObject {
             double pea_dia = resultado.getDouble(13);
             double idh_educacao = resultado.getDouble(14);
             double idh_longevidade = resultado.getDouble(15);
+            String ultimaalteracao = resultado.getString(16);
 
-            City city = new City(id,cidade,microregiao,estado,regiaogeografica,areakm,populacao,domicilios,pibTotal,idh_geral,renda_media,renda_nominal,pea_dia,idh_educacao,idh_longevidade);
+            City city = new City(id,cidade,microregiao,estado,regiaogeografica,areakm,populacao,domicilios,pibTotal,idh_geral,renda_media,renda_nominal,pea_dia,idh_educacao,idh_longevidade,ultimaalteracao);
 
             cidades.add(city);
             //cidades[i] = city;
@@ -92,8 +93,9 @@ public  class DAO_Ordenacao implements DataAcessObject {
             double pea_dia = resultado.getDouble(13);
             double idh_educacao = resultado.getDouble(14);
             double idh_longevidade = resultado.getDouble(15);
+            String ultimaalteracao = resultado.getString(16);
 
-            City city = new City(id,cidade,microregiao,estado,regiaogeografica,areakm,populacao,domicilios,pibTotal,idh_geral,renda_media,renda_nominal,pea_dia,idh_educacao,idh_longevidade);
+            City city = new City(id,cidade,microregiao,estado,regiaogeografica,areakm,populacao,domicilios,pibTotal,idh_geral,renda_media,renda_nominal,pea_dia,idh_educacao,idh_longevidade,ultimaalteracao);
 
             cidades.add(city);
             //cidades[i] = city;

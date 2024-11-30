@@ -34,12 +34,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="DeletarButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="EditarButton" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
@@ -73,21 +68,30 @@
                               <Component id="jTextFieldRankingIDH" min="-2" pref="113" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
-                          <Component id="idhEduca" min="-2" pref="134" max="-2" attributes="0"/>
-                          <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
-                          <Component id="peaField" min="-2" pref="134" max="-2" attributes="0"/>
-                          <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
-                          <Component id="rendaNominalField" min="-2" pref="134" max="-2" attributes="0"/>
-                          <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
-                          <Component id="rendaMediaField" min="-2" pref="134" max="-2" attributes="0"/>
-                          <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
-                          <Component id="idhLonge" alignment="0" min="-2" pref="134" max="-2" attributes="0"/>
-                          <Component id="FecharButton" min="-2" max="-2" attributes="0"/>
-                      </Group>
                   </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="DeletarButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="EditarButton" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="FecharButton" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
+                      <Component id="idhEduca" pref="134" max="32767" attributes="0"/>
+                      <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
+                      <Component id="peaField" pref="134" max="32767" attributes="0"/>
+                      <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
+                      <Component id="rendaNominalField" pref="134" max="32767" attributes="0"/>
+                      <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
+                      <Component id="rendaMediaField" pref="134" max="32767" attributes="0"/>
+                      <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
+                      <Component id="idhLonge" alignment="0" pref="134" max="32767" attributes="0"/>
+                      <Component id="UltimaAlteracaoTextField" alignment="0" max="32767" attributes="0"/>
+                  </Group>
+                  <Component id="jLabel19" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -182,21 +186,23 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel19" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jTextFieldRankingIDH" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jTextFieldRankingPib" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="FecharButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                      <Component id="jTextFieldRankingIDH" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="UltimaAlteracaoTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <Component id="jTextFieldRankingPib" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="DeletarButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="EditarButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="FecharButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="46" max="32767" attributes="0"/>
+              <EmptySpace pref="47" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -398,6 +404,16 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="EditarButtonActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="UltimaAlteracaoTextField">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel19">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#xda;ltima Altera&#xe7;&#xe3;o"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>
